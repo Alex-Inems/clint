@@ -34,7 +34,35 @@ To get started with Uplift, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/AlexInem/uplift.git
+   git clone https://github.com/Alex-Inem/uplift.git
+
+Contributing
+We welcome contributions to Uplift! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
+
+Fork the repository.
+
+Create your feature branch:
+
+git checkout -b feature/YourFeature
+
+Commit your changes:
+
+git commit -m "Add some feature"
+
+Push to the branch:
+git push origin feature/YourFeature
+
+Open a pull request.
+
+License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Contact
+For any inquiries or feedback, please reach out to:
+
+Alex  - www.inema9886@gmail.com
+
 
 ### LICENSE
 
