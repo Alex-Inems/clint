@@ -46,7 +46,8 @@ const PricingPage = () => {
     <div className="min-h-screen bg-gray-100 py-12">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-gray-800">Our Pricing Plans</h1>
-        <p className="text-gray-500 mt-2">Choose the plan that’s right for you and your team.</p>
+        <p className="text-gray-500 mt-2">Choose the plan that&apos;s right for you and your team.</p>
+        <p className="text-red-950 mt-2">This Feature is currently unavailable</p>
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
