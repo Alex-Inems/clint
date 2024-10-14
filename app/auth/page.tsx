@@ -2,7 +2,9 @@
 
 import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation'; // Import useRouter for redirection
-import { auth, googleProvider, db, setDoc, doc } from '../../firebaseConfig';
+import { auth, googleProvider, db } from '../../firebaseConfig';
+import { setDoc, doc } from "firebase/firestore";
+
 import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { motion } from 'framer-motion';
 
