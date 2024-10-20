@@ -1,9 +1,10 @@
 "use client";
 
 import React from 'react';
-import { signIn } from 'next-auth/react';
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const HomePage = () => {
    
@@ -39,16 +40,13 @@ const HomePage = () => {
       >
        Integrates hardware and software
 solutions to drive retail business efficiencies.
-NeüRMS is user friendly, easy to use and offer great value to retail businesse
+UpLift is user friendly, easy to use and offer great value to retail businesse
       </motion.p>
-
-      <button
-        onClick={() => signIn('google')}
-        className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6"
-      >
+      <Link href="/auth">
+      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6">
         Sign In
       </button>
-
+    </Link>
       {/* Floating Images */}
       <div className="flex space-x-4 mb-6">
         <motion.div

@@ -1,6 +1,6 @@
 // components/RestaurantPage.tsx
 import React from 'react';
-
+import Link from 'next/link';
 
 interface RestaurantPageProps {
   title: string;
@@ -19,9 +19,12 @@ const RestaurantPage: React.FC<RestaurantPageProps> = ({ title, description, ima
       <div className="relative z-10 text-center p-4">
         <h1 className="text-4xl font-bold mb-4">{title}</h1>
         <p className="text-lg mb-6">{description}</p>
-        <button className="px-6 py-3 bg-blue-600 rounded-lg shadow-md transition duration-300 hover:bg-blue-500">
-          Sign In
-        </button>
+        <Link href="/auth">
+      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6">
+        SignIn
+      </button>
+    </Link>
+        
       </div>
     </div>
   );

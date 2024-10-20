@@ -1,7 +1,7 @@
 "use client";
-
+import Link from 'next/link';
 import React from 'react';
-import { signIn } from 'next-auth/react';
+
 import Image from 'next/image';
 
 // Define the type for the props
@@ -32,12 +32,12 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
         <p className="text-lg mb-6 max-w-xl">
           {description}
         </p>
-        <button
-          onClick={() => signIn('google')} // Directly call signIn function on button click
-          className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500"
-        >
-          {buttonText}
-        </button>
+        <Link href="/auth">
+      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6">
+        {buttonText}
+      </button>
+    </Link>
+
       </div>
       
       {/* Right side: Image */}

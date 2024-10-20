@@ -1,44 +1,38 @@
+'use client';
+
 import React from 'react';
-import Link from 'next/link'; // Import Link from next/link
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+} from 'react-share';
 
 const Footer = () => {
+  const url = 'https://yourwebsite.com'; // Replace with your URL
+
+
   return (
-    <footer className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6 mt-10">
+    <footer className="bg-gradient-to-r from-blue-800 via-purple-600 to-purple-900 text-white py-8  shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-center md:text-left">
-            <h2 className="text-lg font-semibold">TrackMe</h2>
-            <p className="mt-2 text-sm">Your ultimate time management solution.</p>
-          </div>
-          <div className="mt-4 md:mt-0">
-            <ul className="flex flex-col md:flex-row space-x-0 md:space-x-6">
-              <li>
-                <Link href="/about" className="text-sm hover:underline">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm hover:underline">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="text-sm hover:underline">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-sm hover:underline">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
+        <div className="flex flex-col md:flex-row justify-center items-center space-x-4 mb-4">
+          <h2 className="text-lg font-bold">Share Uplift:</h2>
+          <div className="flex space-x-4">
+            <FacebookShareButton url={url}>
+              <FacebookIcon size={32} round className="hover:opacity-80 transition duration-300" />
+            </FacebookShareButton>
+            <TwitterShareButton url={url}>
+              <TwitterIcon size={32} round className="hover:opacity-80 transition duration-300" />
+            </TwitterShareButton>
+            <LinkedinShareButton url={url}>
+              <LinkedinIcon size={32} round className="hover:opacity-80 transition duration-300" />
+            </LinkedinShareButton>
           </div>
         </div>
         <div className="text-center mt-4">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} TrackMe. All rights reserved.
-          </p>
+          <p className="text-sm">&copy; {new Date().getFullYear()} Uplift. All rights reserved.</p>
         </div>
       </div>
     </footer>

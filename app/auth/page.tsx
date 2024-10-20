@@ -9,9 +9,9 @@ import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPass
 import { motion } from 'framer-motion';
 
 const slideImages = [
-  '/images/eight.jpg',
-  '/images/sev.jpg',
-  '/images/first.jpg',
+  '/images/stock.jpg',
+  '/images/cloud.jpg',
+  '/images/payment.jpg',
 ];
 
 const Auth = () => {

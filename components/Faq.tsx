@@ -5,24 +5,24 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'; // Correct import f
 
 const faqData = [
   {
-    question: 'What is TrackMe?',
-    answer: 'TrackMe is a platform for managing sales, inventory, and analytics for various industries.',
+    question: 'What is Uplift?',
+    answer: 'Uplift is a platform designed to help small and medium-sized businesses (SMEs) in Africa streamline operations, track sales, and manage inventory effectively.',
   },
   {
-    question: 'How does TrackMe help my business?',
-    answer: 'TrackMe helps you streamline sales, manage your inventory, and generate detailed reports to track performance.',
+    question: 'How can Uplift benefit my business?',
+    answer: 'Uplift enables SMEs to manage their business processes efficiently, offering tools for live cart management, financial tracking, and detailed performance analytics.',
   },
   {
-    question: 'Is there a free trial?',
-    answer: 'Yes, we offer a 14-day free trial with no credit card required.',
+    question: 'Does Uplift offer a free trial?',
+    answer: 'Yes, Uplift offers a 30-day free trial with access to all features so you can explore how it benefits your business.',
   },
   {
-    question: 'Can I cancel at any time?',
-    answer: 'Yes, you can cancel your subscription at any time without any cancellation fees.',
+    question: 'Can I customize Uplift for my specific business needs?',
+    answer: 'Yes, Uplift provides customizable options to tailor the platform to fit the unique needs of your business, whether you’re in retail, services, or another sector.',
   },
   {
-    question: 'Do you offer support?',
-    answer: 'Yes, we offer 24/7 customer support via chat, email, and phone.',
+    question: 'What kind of support does Uplift offer?',
+    answer: 'We offer 24/7 customer support through live chat, email, and phone to assist you with any issues or questions.',
   },
 ];
 

@@ -2,6 +2,7 @@
 import React from 'react';
 import Card from './Card';
 import Image from 'next/image'; // Import Image for using images
+import Link from 'next/link';
 
 interface CardData {
   title: string;
@@ -23,7 +24,7 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
       <div className="text-center mb-8">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-wide">
           {gridTitle.split(' ').map((word, index) => (
-            <span key={index} className="inline-block text-shadow-lg">
+            <span key={index} className=" text-shadow-lg">
               {word}{' '}
             </span>
           ))}
@@ -45,13 +46,15 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
       </div>
 
       {/* Sign-in Section */}
-      <div className="bg-blue-500 text-white p-6 mt-8 rounded flex items-center justify-around">
+      <div className="bg-blue-950 text-white p-6 mt-8 rounded flex items-center justify-around">
         <div className="text-center">
           <h3 className="text-xl font-bold mb-2">Join Us Today!</h3>
           <p className="mb-4">Sign in to access exclusive features and tools.</p>
-          <button className="px-4 py-2 bg-blue-700 text-white rounded-lg shadow-md transition duration-300 hover:bg-blue-600">
-            Sign In
-          </button>
+          <Link href="/auth">
+      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6">
+        SignIn
+      </button>
+    </Link>
         </div>
         <div className="hidden md:block">
           <Image

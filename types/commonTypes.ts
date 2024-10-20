@@ -8,6 +8,7 @@ import {
   FaClipboardList,
   FaChartLine,
   FaDollarSign,
+  FaHireAHelper,
 } from 'react-icons/fa';
 
 // Define a type for reusable links, including an optional array for dropdowns
@@ -42,8 +43,8 @@ export const links: Link[] = [
     ],
   },
   {
-    name: 'Plans & Pricing',
-    href: '/pricing',
-    icon: FaDollarSign, // Pass the icon component directly
+    name: 'Help',
+    href: '/help',
+    icon: FaHireAHelper, // Pass the icon component directly
   },
 ];
