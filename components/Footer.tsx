@@ -15,7 +15,7 @@ const Footer = () => {
 
 
   return (
-    <footer className="bg-gradient-to-r from-blue-800 via-purple-600 to-purple-900 text-white py-8  shadow-lg">
+    <footer className=" bg-gradient-to-r from-yellow-50 to-white text-black py-8  shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-center items-center space-x-4 mb-4">
           <h2 className="text-lg font-bold">Share Uplift:</h2>

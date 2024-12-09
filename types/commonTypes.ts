@@ -46,5 +46,9 @@ export const links: Link[] = [
     name: 'Help',
     href: '/help',
     icon: FaHireAHelper, // Pass the icon component directly
-  },
+  },{
+    name: 'Plans & Pricing',
+    href: '/pricing',
+    icon: FaHireAHelper, // Pass the icon component directly
+  }
 ];

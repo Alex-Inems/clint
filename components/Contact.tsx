@@ -5,7 +5,7 @@ export const Contact = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -14,21 +14,17 @@ export const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., send to email, or store in database)
     alert('Message Sent');
   };
 
   return (
-    <div className="bg-white py-16 px-8 md:px-20 lg:px-40">
+    <div className="bg-transparent py-16 px-8 md:px-20 lg:px-40">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          Contact Us
-        </h2>
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-100 p-8 rounded-lg shadow-lg space-y-6"
+          className="bg-gray-900 p-8 rounded-lg shadow-lg space-y-6"
         >
-          <div className="space-y-4">
+          <div className="space-y-6">
             <input
               type="text"
               name="name"
@@ -36,7 +32,7 @@ export const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full p-2 bg-transparent border-b border-gray-600 text-gray-100 focus:outline-none focus:border-indigo-600 transition-all"
             />
             <input
               type="email"
@@ -45,7 +41,7 @@ export const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full p-2 bg-transparent border-b border-gray-600 text-gray-100 focus:outline-none focus:border-indigo-600 transition-all"
             />
             <input
               type="text"
@@ -54,7 +50,7 @@ export const Contact = () => {
               value={formData.subject}
               onChange={handleChange}
               required
-              className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full p-2 bg-transparent border-b border-gray-600 text-gray-100 focus:outline-none focus:border-indigo-600 transition-all"
             />
             <textarea
               name="message"
@@ -62,7 +58,7 @@ export const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full p-4 h-32 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full p-2 bg-transparent border-b border-gray-600 text-gray-100 focus:outline-none focus:border-indigo-600 transition-all"
             />
           </div>
           <button
@@ -73,8 +69,18 @@ export const Contact = () => {
           </button>
         </form>
         <div className="mt-10 text-center text-gray-600">
-          <p>Email: <a href="mailto:support@scholarsphere.com" className="text-indigo-600">support@scholarsphere.com</a></p>
-          <p>Phone: <a href="tel:+11234567890" className="text-indigo-600">+1 (123) 456-7890</a></p>
+          <p>
+            Email:{' '}
+            <a href="mailto:support@scholarsphere.com" className="text-indigo-600">
+              support@scholarsphere.com
+            </a>
+          </p>
+          <p>
+            Phone:{' '}
+            <a href="tel:+11234567890" className="text-indigo-600">
+              +1 (123) 456-7890
+            </a>
+          </p>
         </div>
       </div>
     </div>

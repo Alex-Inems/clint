@@ -46,27 +46,32 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
       </div>
 
       {/* Sign-in Section */}
-      <div className="bg-blue-950 text-white p-6 mt-8 rounded flex items-center justify-around">
-        <div className="text-center">
-          <h3 className="text-xl font-bold mb-2">Join Us Today!</h3>
-          <p className="mb-4">Sign in to access exclusive features and tools.</p>
-          <Link href="/auth">
-      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 mb-6">
-        SignIn
+   {/* Sign-in Section */}
+<div className="bg-red-700 text-white p-6 mt-8 rounded flex flex-col items-center text-center md:flex-row md:text-center md:items-center gap-6">
+  {/* Text Section */}
+  <div className="flex flex-col items-center md:w-2/3">
+    <h3 className="text-2xl font-bold mb-2">Join Us Today!</h3>
+    <p className="text-lg mb-4 leading-relaxed">Sign in to access exclusive features and tools.</p>
+    <Link href="/auth">
+      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400">
+        Sign In
       </button>
     </Link>
-        </div>
-        <div className="hidden md:block">
-          <Image
-            src="/images/nine.jpg" // Replace with your image path
-            alt="Sign In Illustration"
-            width={300} // Adjust width as needed
-            height={150} // Adjust height as needed
-            className="rounded-lg"
-          />
-        </div>
-      </div>
-    </div>
+  </div>
+
+  {/* Image Section */}
+  <div className="md:w-1/3 flex justify-center">
+    <Image
+      src="/images/cashier.jpg" // Replace with your image path
+      alt="Sign In Illustration"
+      width={200} // Adjust width as needed
+      height={120} // Adjust height as needed
+      className="rounded-lg shadow-lg"
+    />
+  </div>
+</div>
+
+</div>
   );
 };
 

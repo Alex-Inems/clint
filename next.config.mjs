@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['via.placeholder.com','lh3.googleusercontent.com'], // Allow images from Google
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com' // Replace with the actual domain you're fetching images from
       },
-};
-
-export default nextConfig;
+    ],
+  },
+  };
+  
+  export default nextConfig;
+  
+  

@@ -34,12 +34,12 @@ const FAQ = () => {
         {faqData.map((item, index) => (
           <Accordion.Item key={index} value={`faq-${index}`}>
             <Accordion.Header>
-              <Accordion.Trigger className="flex justify-between items-center w-full text-left text-lg font-semibold bg-gray-100 p-4 mb-2 rounded-lg">
+              <Accordion.Trigger className="flex justify-between items-center w-full text-left text-lg font-semibold bg-transparent p-4 mb-2 rounded-lg">
                 {item.question}
                 <ChevronDownIcon className="h-5 w-5" />
               </Accordion.Trigger>
             </Accordion.Header>
-            <Accordion.Content className="bg-white p-4 mb-2 rounded-lg text-gray-600">
+            <Accordion.Content className="bg-transparent p-4 mb-2 rounded-lg text-gray-50">
               {item.answer}
             </Accordion.Content>
           </Accordion.Item>
