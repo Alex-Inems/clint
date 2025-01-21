@@ -1,14 +1,14 @@
-// components/CardGrid.tsx
 import React from 'react';
 import Card from './Card';
-import Image from 'next/image'; // Import Image for using images
+import { IconType } from 'react-icons'; // Import IconType for typing
+import { FaRocket } from 'react-icons/fa';
 import Link from 'next/link';
 
 interface CardData {
   title: string;
   description: string;
-  imageUrl: string;
-  
+  Icon: IconType; // Icon component for the card
+  color: string; // Color prop for the icon
 }
 
 interface CardGridProps {
@@ -24,7 +24,7 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
       <div className="text-center mb-8">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-wide">
           {gridTitle.split(' ').map((word, index) => (
-            <span key={index} className=" text-shadow-lg">
+            <span key={index} className="text-shadow-lg">
               {word}{' '}
             </span>
           ))}
@@ -39,39 +39,28 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
             key={index}
             title={card.title}
             description={card.description}
-            imageUrl={card.imageUrl}
-            
+            Icon={card.Icon}
+            color={card.color} // Pass the color prop to Card
           />
         ))}
       </div>
 
       {/* Sign-in Section */}
-   {/* Sign-in Section */}
-<div className="bg-red-700 text-white p-6 mt-8 rounded flex flex-col items-center text-center md:flex-row md:text-center md:items-center gap-6">
-  {/* Text Section */}
-  <div className="flex flex-col items-center md:w-2/3">
-    <h3 className="text-2xl font-bold mb-2">Join Us Today!</h3>
-    <p className="text-lg mb-4 leading-relaxed">Sign in to access exclusive features and tools.</p>
-    <Link href="/auth">
-      <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-400">
-        Sign In
-      </button>
-    </Link>
-  </div>
-
-  {/* Image Section */}
-  <div className="md:w-1/3 flex justify-center">
-    <Image
-      src="/images/cashier.jpg" // Replace with your image path
-      alt="Sign In Illustration"
-      width={200} // Adjust width as needed
-      height={120} // Adjust height as needed
-      className="rounded-lg shadow-lg"
-    />
-  </div>
-</div>
-
-</div>
+      <div className="bg-red-950 text-white p-8 mt-8 rounded-lg shadow-lg flex flex-col items-center text-center gap-6 relative">
+        <FaRocket className="absolute top-4 left-4 text-white text-3xl" />
+        <h3 className="text-4xl font-bold">
+          Ready to Elevate Your Business?
+        </h3>
+        <p className="text-lg mb-2 font-serif font-extralight">
+          Sign in to unlock exclusive features, tools, and insights that help you grow and manage your business effortlessly.
+        </p>
+        <Link href="/auth">
+          <button className="px-8 py-4 bg-transparent text-white font-semibold rounded-lg shadow-border shadow-xl transition-all duration-300 hover:bg-transparent hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-400">
+            Get Started Now
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 };
 
@@ -83,8 +72,8 @@ CardGrid.defaultProps = {
     {
       title: 'Default Card',
       description: 'This is a default card description.',
-      imageUrl: '/default-image.png',
-      
+      Icon: () => <div className="text-gray-400">Default Icon</div>, // Fallback icon if none provided
+      color: 'text-gray-400', // Default color
     },
   ],
 };

@@ -171,6 +171,7 @@ const PricingPlans: React.FC = () => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };

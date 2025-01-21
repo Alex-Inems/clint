@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { db, collection, addDoc } from '../firebaseConfig'; // Import Firebase functions
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,14 +8,30 @@ export const Contact = () => {
     subject: '',
     message: '',
   });
+  const [status, setStatus] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Message Sent');
+    setStatus('Sending...'); // Set status to "Sending"
+
+    try {
+      // Add form data to Firestore
+      await addDoc(collection(db, 'messages'), {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        timestamp: new Date(),
+      });
+      setStatus('Message Sent Successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
+    } catch  {
+      setStatus('Error sending message, please try again.');
+    }
   };
 
   return (
@@ -22,7 +39,7 @@ export const Contact = () => {
       <div className="max-w-3xl mx-auto">
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-900 p-8 rounded-lg shadow-lg space-y-6"
+          className=" p-8 rounded-lg shadow-lg space-y-6"
         >
           <div className="space-y-6">
             <input
@@ -68,6 +85,11 @@ export const Contact = () => {
             Send Message
           </button>
         </form>
+        {status && (
+          <div className="mt-4 text-center text-gray-600">
+            <p>{status}</p>
+          </div>
+        )}
         <div className="mt-10 text-center text-gray-600">
           <p>
             Email:{' '}

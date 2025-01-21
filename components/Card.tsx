@@ -1,32 +1,21 @@
-// Card.tsx
 import React from 'react';
-import Image from 'next/image';
+import { IconType } from 'react-icons';
 
 interface CardProps {
   title: string;
   description: string;
-  imageUrl: string;
-  
+  Icon: IconType;
+  color: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description, imageUrl, }) => {
+const Card: React.FC<CardProps> = ({ title, description, Icon, color }) => {
   return (
-    <div className=" rounded-lg shadow-md transition-transform transform hover:scale-105 p-2 sm:p-6 flex flex-col justify-between relative overflow-hidden">
-      <div className="absolute inset-0  rounded-lg"></div>
-      <div className="relative z-10">
-        <div className="relative overflow-hidden rounded-lg">
-          <Image
-            src={imageUrl}
-            alt={title}
-            width={300}
-            height={200}
-            className="object-cover  sm:h-48 rounded-lg mb-4 transition-transform duration-300 hover:scale-110"
-          />
-        </div>
-        <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-        <p className="text-black mb-4">{description}</p>
-        
+    <div className="bg-gray-100 rounded-lg p-4 text-center shadow-md">
+      <div className={`text-4xl mb-4 ${color}`}>
+        <Icon />
       </div>
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </div>
   );
 };
