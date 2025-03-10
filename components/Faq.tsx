@@ -5,23 +5,23 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'; // Correct import f
 
 const faqData = [
   {
-    question: 'What is Uplift?',
-    answer: 'Uplift is a platform designed to help small and medium-sized businesses (SMEs) in Africa streamline operations, track sales, and manage inventory effectively.',
+    question: 'What is elivra?',
+    answer: 'elivra is a platform designed to help small and medium-sized businesses (SMEs) in Africa streamline operations, track sales, and manage inventory effectively.',
   },
   {
-    question: 'How can Uplift benefit my business?',
-    answer: 'Uplift enables SMEs to manage their business processes efficiently, offering tools for live cart management, financial tracking, and detailed performance analytics.',
+    question: 'How can elivra benefit my business?',
+    answer: 'elivra enables SMEs to manage their business processes efficiently, offering tools for live cart management, financial tracking, and detailed performance analytics.',
   },
   {
-    question: 'Does Uplift offer a free trial?',
-    answer: 'Yes, Uplift offers a 30-day free trial with access to all features so you can explore how it benefits your business.',
+    question: 'Does elivra offer a free trial?',
+    answer: 'Yes, elivra offers a 30-day free trial with access to all features so you can explore how it benefits your business.',
   },
   {
-    question: 'Can I customize Uplift for my specific business needs?',
-    answer: 'Yes, Uplift provides customizable options to tailor the platform to fit the unique needs of your business, whether you’re in retail, services, or another sector.',
+    question: 'Can I customize elivra for my specific business needs?',
+    answer: 'Yes, elivra provides customizable options to tailor the platform to fit the unique needs of your business, whether you’re in retail, services, or another sector.',
   },
   {
-    question: 'What kind of support does Uplift offer?',
+    question: 'What kind of support does elivra offer?',
     answer: 'We offer 24/7 customer support through live chat, email, and phone to assist you with any issues or questions.',
   },
 ];

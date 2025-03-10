@@ -7,17 +7,17 @@ import { FaQuoteLeft } from 'react-icons/fa';
 // Testimonial data with more detailed reviews (minimum 40 words)
 const testimonials = [
   {
-    text: 'UpLift has completely transformed the way we operate our business. The platform is incredibly fast, reliable, and user-friendly. We have seen a significant boost in productivity across all departments. It is truly an invaluable tool for our team to achieve success.',
+    text: 'elivra has completely transformed the way we operate our business. The platform is incredibly fast, reliable, and user-friendly. We have seen a significant boost in productivity across all departments. It is truly an invaluable tool for our team to achieve success.',
     name: 'John Doe',
     title: 'CEO of Retail Inc.',
   },
   {
-    text: 'The integration with our existing systems was seamless, and since implementing UpLift, our productivity has skyrocketed. We have been able to streamline our processes, reduce downtime, and improve collaboration across teams. This has significantly impacted our bottom line in a positive way.',
+    text: 'The integration with our existing systems was seamless, and since implementing elivra, our productivity has skyrocketed. We have been able to streamline our processes, reduce downtime, and improve collaboration across teams. This has significantly impacted our bottom line in a positive way.',
     name: 'Jane Smith',
     title: 'CTO of Tech Retailers',
   },
   {
-    text: '"I have never experienced customer support like this before. The team behind UpLift genuinely cares about our success. Anytime we had an issue, they were quick to respond and resolve the problem. Their dedication to service is unparalleled, and we couldnt be happier with the results."',
+    text: '"I have never experienced customer support like this before. The team behind elivra genuinely cares about our success. Anytime we had an issue, they were quick to respond and resolve the problem. Their dedication to service is unparalleled, and we couldnt be happier with the results."',
     name: 'Mark Lee',
     title: 'Founder of Innovate Retail',
   },

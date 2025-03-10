@@ -53,8 +53,8 @@ const Point = () => {
   return (
     <div>
       <HomeComponent
-        title="Uplift Supply Chain Management"
-        description="Uplift gives daily stock alert emails of items with low or no stock, and inventory levels can be exported to printable spreadsheets.
+        title="elivra Supply Chain Management"
+        description="elivra gives daily stock alert emails of items with low or no stock, and inventory levels can be exported to printable spreadsheets.
         
 Request vendor supply, negotiate price, monitor price changes, schedule delivery and post payments all in one place."
         buttonText="Sign In"
@@ -64,7 +64,7 @@ Request vendor supply, negotiate price, monitor price changes, schedule delivery
       />
       <CardGrid
         gridTitle="Key features of Point of Sales System"
-        gridDescription="Uplift offers a comprehensive suite of tools designed to help small and medium enterprises across Africa grow and thrive."
+        gridDescription="elivra offers a comprehensive suite of tools designed to help small and medium enterprises across Africa grow and thrive."
         cardsData={cardsData}
       />
     </div>

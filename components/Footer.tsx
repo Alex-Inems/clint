@@ -18,7 +18,7 @@ const Footer = () => {
     <footer className=" bg-gradient-to-r from-yellow-50 to-white text-black py-8  shadow-lg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-center items-center space-x-4 mb-4">
-          <h2 className="text-lg font-bold">Share Uplift:</h2>
+          <h2 className="text-lg font-bold">Share elivra:</h2>
           <div className="flex space-x-4">
             <FacebookShareButton url={url}>
               <FacebookIcon size={32} round className="hover:opacity-80 transition duration-300" />
@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-center mt-4">
-          <p className="text-sm">&copy; {new Date().getFullYear()} Uplift. All rights reserved.</p>
+          <p className="text-sm">&copy; {new Date().getFullYear()} elivra. All rights reserved.</p>
         </div>
       </div>
     </footer>

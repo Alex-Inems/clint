@@ -53,7 +53,7 @@ const Reports = () => {
   return (
     <div>
       <HomeComponent
-        title="Uplift Reports and Analytics"
+        title="elivra Reports and Analytics"
         description="Powerful report analytics designed to help you run your business and have the right insights."
         buttonText="Sign In"
         imageSrc="/images/multiple-pos.png" // Update with your actual image path

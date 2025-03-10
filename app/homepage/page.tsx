@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import TestimonialAndWhyChooseUs from '@/components/Testimonial';
+
 
 const images = [
   'images/screen1.jpg',

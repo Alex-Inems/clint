@@ -26,7 +26,7 @@ const HelpPage = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-lg max-w-3xl mx-auto mb-8 text-gray-300"
           >
-            Uplift is dedicated to your growth. Whether it’s guidance, support, or solutions, we’re always here to help you excel.
+            elivra is dedicated to your growth. Whether it’s guidance, support, or solutions, we’re always here to help you excel.
           </motion.p>
           <motion.a
             href="#contact"
@@ -90,7 +90,7 @@ const HelpPage = () => {
       {/* Partners Section */}
       <section className="py-16 px-6 bg-gray-800">
         <div className="max-w-6xl mx-auto">
-        
+
           <Partners />
         </div>
       </section>

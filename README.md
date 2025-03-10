@@ -1,6 +1,6 @@
-# Uplift
+# elivra
 
-Uplift is a powerful application designed to assist Small and Medium Enterprises (SMEs) across Africa in managing their business processes more effectively. With features such as Multiple Live Cart POS, Uplift provides a seamless experience for both businesses and their customers.
+elivra is a powerful application designed to assist Small and Medium Enterprises (SMEs) across Africa in managing their business processes more effectively. With features such as Multiple Live Cart POS, elivra provides a seamless experience for both businesses and their customers.
 
 ## Table of Contents
 
@@ -30,14 +30,14 @@ Uplift is a powerful application designed to assist Small and Medium Enterprises
 
 ## Installation
 
-To get started with Uplift, follow these steps:
+To get started with elivra, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Alex-Inem/uplift.git
+   git clone https://github.com/Alex-Inem/elivra.git
 
 Contributing
-We welcome contributions to Uplift! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
+We welcome contributions to elivra! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
 Fork the repository.
 

@@ -7,21 +7,21 @@ const Point = () => {
   const cardsData = [
     {
       title: "Cloud Based",
-      description: "From the Uplift cloud or mobile Dashboard apps for iOS or Android, you may access all the reports even while traveling.",
+      description: "From the elivra cloud or mobile Dashboard apps for iOS or Android, you may access all the reports even while traveling.",
       Icon: FaCloud, // Cloud icon
       color: "text-blue-500", // Blue color for the icon
       buttonText: "Learn More"
     },
     {
       title: "Device Compatibility",
-      description: "On iPad, PC, Android phone tablets, old & modern POS Terminals, Uplift Restaurant POS runs flawlessly.",
+      description: "On iPad, PC, Android phone tablets, old & modern POS Terminals, elivra Restaurant POS runs flawlessly.",
       Icon: FaMobileAlt, // Mobile icon
       color: "text-green-500", // Green color for the icon
       buttonText: "Learn More"
     },
     {
       title: "Discount & Loyalty",
-      description: "Use discounts on the total or on particular goods. The UpLift Loyalty system is robust, adaptable, and simple to use. It can automatically enroll new customers.",
+      description: "Use discounts on the total or on particular goods. The elivra Loyalty system is robust, adaptable, and simple to use. It can automatically enroll new customers.",
       Icon: FaTag, // Tag icon
       color: "text-yellow-500", // Yellow color for the icon
       buttonText: "Learn More"
@@ -53,8 +53,8 @@ const Point = () => {
   return (
     <div>
       <HomeComponent
-        title="Uplift, Multiple Live Cart POS."
-        description="Uplift's Multiple Live Cart POS empowers businesses to manage multiple transactions simultaneously, ensuring smoother operations and faster service. With real-time updates, it enhances staff efficiency and provides a seamless customer experience, making it ideal for busy restaurants, retail, and service-oriented businesses."
+        title="elivra, Multiple Live Cart POS."
+        description="elivra's Multiple Live Cart POS empowers businesses to manage multiple transactions simultaneously, ensuring smoother operations and faster service. With real-time updates, it enhances staff efficiency and provides a seamless customer experience, making it ideal for busy restaurants, retail, and service-oriented businesses."
         buttonText="Sign In"
         imageSrc="/images/cloud.jpg" // Update with your actual image path
         imageAlt="Image description"
@@ -62,7 +62,7 @@ const Point = () => {
       />
       <CardGrid
         gridTitle="Key features of Point of Sales System"
-        gridDescription="Uplift offers a comprehensive suite of tools designed to help small and medium enterprises across Africa grow and thrive."
+        gridDescription="elivra offers a comprehensive suite of tools designed to help small and medium enterprises across Africa grow and thrive."
         cardsData={cardsData}
       />
     </div>

@@ -3,12 +3,12 @@ import { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthProvider"; // Ensure correct path
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer";
+
 
 
 export const metadata: Metadata = {
-  title: "Uplift",
-  description: "UpLifting your business",
+  title: "elivra",
+  description: "elivraing your business",
 };
 
 export default function RootLayout({
@@ -20,10 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <Navbar/>
+          <Navbar />
           {children} {/* Render child components/pages here */}
         </AuthProvider>
-     
+
       </body>
     </html>
   );

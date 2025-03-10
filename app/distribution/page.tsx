@@ -6,19 +6,19 @@ const Distribution = () => {
   const cardsData = [
     {
       title: "Cloud Based",
-      description: "From the Uplift cloud or mobile Dashboard apps for iOS or Android, you may access all the reports even while traveling.",
+      description: "From the elivra cloud or mobile Dashboard apps for iOS or Android, you may access all the reports even while traveling.",
       Icon: FaCloud,
       color: "text-red-500", // Icon color
     },
     {
       title: "Device Compatibility",
-      description: "On iPad, PC, Android phone tablets, old & modern POS Terminals, Uplift Restaurant POS runs flawlessly.",
+      description: "On iPad, PC, Android phone tablets, old & modern POS Terminals, elivra Restaurant POS runs flawlessly.",
       Icon: FaMobileAlt,
       color: "text-red-500", // Icon color
     },
     {
       title: "Discount & Loyalty",
-      description: "Use discounts on the total or on particular goods. The UpLift Loyalty system is robust, adaptable, and simple to use. It can automatically enroll new customers.",
+      description: "Use discounts on the total or on particular goods. The elivra Loyalty system is robust, adaptable, and simple to use. It can automatically enroll new customers.",
       Icon: FaTags,
       color: "text-red-500", // Icon color
     },

@@ -53,8 +53,8 @@ const Inventory = () => {
   return (
     <div>
       <HomeComponent
-        title="Uplift Smart Inventory, say goodbye to spreadsheets with our cloud-based product."
-        description="Smart inventory management system to maximize your profits. UpLift product inventory management system allows you to port products from your old POS online platform by importing a CSV file.
+        title="elivra Smart Inventory, say goodbye to spreadsheets with our cloud-based product."
+        description="Smart inventory management system to maximize your profits. elivra product inventory management system allows you to port products from your old POS online platform by importing a CSV file.
 
 Plan purchases, export records to suppliers, track stock receipts, and manage vendor relationships."
         buttonText="Sign In"
