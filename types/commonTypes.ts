@@ -9,6 +9,8 @@ import {
   FaChartLine,
   FaDollarSign,
   FaHireAHelper,
+  FaHandsHelping,
+  FaUsersCog,
 } from 'react-icons/fa';
 
 // Define a type for reusable links, including an optional array for dropdowns
@@ -34,7 +36,7 @@ export const links: Link[] = [
   {
     name: 'Features',
     href: '/features',
-    icon: FaCogs, // Pass the icon component directly
+    icon: FaUsersCog, // Pass the icon component directly
     dropdownItems: [
       { name: 'Point of Sale', href: '/point', icon: FaShoppingCart },
       { name: 'Inventory Management', href: '/inventory', icon: FaClipboardList },
@@ -45,10 +47,10 @@ export const links: Link[] = [
   {
     name: 'Help',
     href: '/help',
-    icon: FaHireAHelper, // Pass the icon component directly
+    icon:  FaHandsHelping, // Pass the icon component directly
   },{
     name: 'Plans & Pricing',
     href: '/pricing',
-    icon: FaHireAHelper, // Pass the icon component directly
+    icon: FaShoppingCart, // Pass the icon component directly
   }
 ];

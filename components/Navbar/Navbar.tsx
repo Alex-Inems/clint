@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
-import Link from 'next/link';
-import { useAuth } from '@/context/AuthContext';
-import { auth } from '../../firebaseConfig';
-import { signOut } from 'firebase/auth';
-import { links } from '@/types/commonTypes';
-import Image from 'next/image';
+import { useState, useCallback } from "react";
+import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+import { auth } from "../../firebaseConfig";
+import { signOut } from "firebase/auth";
+import { links } from "@/types/commonTypes";
+import Image from "next/image";
+import { Menu, X, LogIn, LogOut } from "lucide-react"; // Import Lucide icons
 
 const Navbar = () => {
   const { currentUser } = useAuth();
-  console.log('Current User in Navbar:', currentUser);
+  console.log("Current User in Navbar:", currentUser);
 
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
@@ -19,7 +20,7 @@ const Navbar = () => {
     try {
       await signOut(auth);
     } catch (error) {
-      console.error('Sign out error:', error);
+      console.error("Sign out error:", error);
     }
   }, []);
 
@@ -29,36 +30,42 @@ const Navbar = () => {
   }, []);
 
   const toggleDropdown = (name: string) => {
-    setDropdownOpen(prev => (prev === name ? null : name)); // Toggle dropdown
+    setDropdownOpen((prev) => (prev === name ? null : name)); // Toggle dropdown
   };
 
   return (
-    <nav className="bg-red-700 shadow-lg">
+    <nav className="bg-transparent backdrop-blur-lg border border-white/20 text-slate-500 transition-all duration-300 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="text-3xl font-extrabold text-white transition duration-300 hover:opacity-80">
-              UpLift
+            <Link
+              href="/"
+              prefetch={true}
+              className="text-3xl font-extrabold transition duration-300 hover:opacity-80 flex items-center space-x-2"
+            >
+              
+              <span>Elivra</span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsOpen(prev => !prev)}
-              className="text-white focus:outline-none"
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="text-slate-500 focus:outline-none"
             >
-              {isOpen ? '✖' : '☰'}
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center text-sm space-x-6 ${isOpen ? 'block' : 'hidden'}`}>
+          <div className="hidden md:flex items-center text-sm space-x-6">
             {links.map((link) => (
-              <div key={link.name} className="relative ">
+              <div key={link.name} className="relative">
                 {link.dropdownItems ? (
                   <button
-                    className="flex items-center text-sm font-serif text-white transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
+                    className="flex items-center text-sm transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
                     onClick={() => toggleDropdown(link.name)}
                   >
                     {link.icon && <link.icon className="mr-1" />}
@@ -67,7 +74,8 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center text-sm text-white transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
+                    prefetch={true}
+                    className="flex items-center text-sm transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
                     onClick={handleLinkClick}
                   >
                     {link.icon && <link.icon className="mr-1" />}
@@ -75,11 +83,12 @@ const Navbar = () => {
                   </Link>
                 )}
                 {dropdownOpen === link.name && link.dropdownItems && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                  <div className="absolute left-0 mt-2 w-48 bg-transparent rounded-md shadow-lg z-10">
                     {link.dropdownItems.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
+                        prefetch={true}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-500 hover:text-white transition duration-300 rounded-md"
                         onClick={handleLinkClick}
                       >
@@ -103,20 +112,23 @@ const Navbar = () => {
                     priority
                   />
                 )}
-                <span className="hidden lg:block text-white">{currentUser.displayName || 'User'}</span>
+                <span className="hidden lg:block text-white">{currentUser.displayName || "User"}</span>
                 <button
                   onClick={handleSignOut}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-red-500"
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-red-500 flex items-center space-x-2"
                 >
-                  Log Out
+                  <LogOut className="w-4 h-4" />
+                  <span>Log Out</span>
                 </button>
               </div>
             ) : (
               <Link
                 href="/auth"
-                className="px-4 py-2 bg-red-700 text-white border border-white rounded-lg shadow-md transition duration-300 hover:bg-white hover:text-red-700"
+                prefetch={true}
+                className="px-4 py-2 bg-green-600 text-white border border-white rounded-lg shadow-md transition duration-300 hover:bg-white hover:text-green-700 flex items-center space-x-2"
               >
-                Log In
+                <LogIn className="w-4 h-4" />
+                <span>Log In</span>
               </Link>
             )}
           </div>
@@ -125,13 +137,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden bg-slate-950 backdrop-blur-lg border border-white/20 shadow-lg">
           <div className="flex flex-col space-y-4 py-4 px-2">
             {links.map((link) => (
               <div key={link.name}>
                 {link.dropdownItems ? (
                   <button
-                    className="flex items-center text-lg text-white transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
+                    className="flex items-center text-lg text-slate-200 transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
                     onClick={() => toggleDropdown(link.name)}
                   >
                     {link.icon && <link.icon className="mr-1" />}
@@ -140,7 +152,8 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="flex items-center text-lg text-white transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
+                    prefetch={true}
+                    className="flex items-center text-lg text-slate-200 transition duration-300 hover:underline hover:underline-offset-4 focus:outline-none"
                     onClick={handleLinkClick}
                   >
                     {link.icon && <link.icon className="mr-1" />}
@@ -153,6 +166,7 @@ const Navbar = () => {
                       <Link
                         key={item.href}
                         href={item.href}
+                        prefetch={true}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-500 hover:text-white transition duration-300 rounded-md"
                         onClick={handleLinkClick}
                       >
@@ -165,31 +179,21 @@ const Navbar = () => {
               </div>
             ))}
             {currentUser ? (
-              <div className="flex items-center space-x-4">
-                {currentUser.photoURL && (
-                  <Image
-                    src={currentUser.photoURL}
-                    alt="Profile Picture"
-                    className="rounded-full"
-                    width={40}
-                    height={40}
-                    priority
-                  />
-                )}
-                <span className="text-white">{currentUser.displayName || 'User'}</span>
-                <button
-                  onClick={handleSignOut}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-red-500"
-                >
-                  Log Out
-                </button>
-              </div>
+              <button
+                onClick={handleSignOut}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-red-500 flex items-center space-x-2"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Log Out</span>
+              </button>
             ) : (
               <Link
                 href="/auth"
-                className="px-4 py-2 bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500"
+                prefetch={true}
+                className="px-3 py-2 w-fit bg-green-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-green-500 flex items-center space-x-2"
               >
-                Log In
+                <LogIn className="w-4 h-4" />
+                <span>Log In</span>
               </Link>
             )}
           </div>

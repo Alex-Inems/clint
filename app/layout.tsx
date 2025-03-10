@@ -23,7 +23,7 @@ export default function RootLayout({
           <Navbar/>
           {children} {/* Render child components/pages here */}
         </AuthProvider>
-      <Footer/>
+     
       </body>
     </html>
   );
