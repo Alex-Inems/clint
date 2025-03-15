@@ -54,11 +54,12 @@ const Reports = () => {
     <div>
       <HomeComponent
         title="elivra Reports and Analytics"
+        subtitle=""
         description="Powerful report analytics designed to help you run your business and have the right insights."
         buttonText="Sign In"
         imageSrc="/images/multiple-pos.png" // Update with your actual image path
         imageAlt="Image description"
-        isImageFirst={false} // Set to true if you want the image first
+        
       />
       <CardGrid
         gridTitle="Key Features"
