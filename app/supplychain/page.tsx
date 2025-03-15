@@ -54,13 +54,14 @@ const Point = () => {
     <div>
       <HomeComponent
         title="elivra Supply Chain Management"
+        subtitle=""
         description="elivra gives daily stock alert emails of items with low or no stock, and inventory levels can be exported to printable spreadsheets.
         
 Request vendor supply, negotiate price, monitor price changes, schedule delivery and post payments all in one place."
         buttonText="Sign In"
         imageSrc="/images/supply-hero.png" // Update with your actual image path
         imageAlt="Image description"
-        isImageFirst={false} // Set to true if you want the image first
+        
       />
       <CardGrid
         gridTitle="Key features of Point of Sales System"
