@@ -51,14 +51,16 @@ const Point = () => {
   ];
 
   return (
-    <div>
+    <div className='border-b-gray-300'>
       <HomeComponent
-        title="elivra, Multiple Live Cart POS."
-        description="elivra's Multiple Live Cart POS empowers businesses to manage multiple transactions simultaneously, ensuring smoother operations and faster service. With real-time updates, it enhances staff efficiency and provides a seamless customer experience, making it ideal for busy restaurants, retail, and service-oriented businesses."
+      
+        title="Multiple Live Cart POS."
+        subtitle=''
+        description="Empowers businesses.  Manage multiple transactions. Faster services."
         buttonText="Sign In"
-        imageSrc="/images/cloud.jpg" // Update with your actual image path
+        imageSrc="/images/5.jpg" // Update with your actual image path
         imageAlt="Image description"
-        isImageFirst={false} // Set to true if you want the image first
+    
       />
       <CardGrid
         gridTitle="Key features of Point of Sales System"

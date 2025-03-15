@@ -20,7 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
-          <Navbar />
+           {/* Ensure navbar is on top */}
+      <div className="relative z-[1000]">
+        <Navbar />
+      </div>
           {children} {/* Render child components/pages here */}
         </AuthProvider>
 

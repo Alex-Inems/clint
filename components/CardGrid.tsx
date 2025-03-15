@@ -22,9 +22,9 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
     <div className="bg-white w-full p-4">
       {/* Title and description above the cards */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4 tracking-wide">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4 tracking-wide">
           {gridTitle.split(' ').map((word, index) => (
-            <span key={index} className="text-shadow-lg">
+            <span key={index} className="">
               {word}{' '}
             </span>
           ))}
@@ -46,11 +46,9 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
       </div>
 
       {/* Sign-in Section */}
-      <div className="bg-red-950 text-white p-8 mt-8 rounded-lg shadow-lg flex flex-col items-center text-center gap-6 relative">
+      <div className="bg-[url('/images/nature.jpg')] bg-cover bg-center bg-no-repeat text-white p-8 mt-4 rounded-lg shadow-lg flex flex-col items-center text-center gap-6 relative">
         <FaRocket className="absolute top-4 left-4 text-white text-3xl" />
-        <h3 className="text-4xl font-bold">
-          Ready to Elevate Your Business?
-        </h3>
+        <h3 className="text-4xl font-bold">Ready to Elevate Your Business?</h3>
         <p className="text-lg mb-2 font-serif font-extralight">
           Sign in to unlock exclusive features, tools, and insights that help you grow and manage your business effortlessly.
         </p>
@@ -60,6 +58,16 @@ const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsDa
           </button>
         </Link>
       </div>
+
+      {/* Footer Section */}
+      <footer className="bg-gray-900 text-white text-center  mt-6">
+        <p className="text-sm">&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <nav className="mt-4">
+          <Link href="/about" className="text-gray-400 hover:text-white mx-4">About</Link>
+          <Link href="/contact" className="text-gray-400 hover:text-white mx-4">Contact</Link>
+          <Link href="/privacy" className="text-gray-400 hover:text-white mx-4">Privacy Policy</Link>
+        </nav>
+      </footer>
     </div>
   );
 };

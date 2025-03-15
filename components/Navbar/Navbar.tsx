@@ -2,12 +2,12 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
 import { auth } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { links } from "@/types/commonTypes";
-import Image from "next/image";
-import { Menu, X, LogIn, LogOut } from "lucide-react"; // Import Lucide icons
+import { Menu, X, LogIn, LogOut } from "lucide-react"; // Icons
 
 const Navbar = () => {
   const { currentUser } = useAuth();
@@ -25,16 +25,16 @@ const Navbar = () => {
   }, []);
 
   const handleLinkClick = useCallback(() => {
-    setDropdownOpen(null); // Close dropdown
-    setIsOpen(false); // Close mobile menu
+    setDropdownOpen(null);
+    setIsOpen(false);
   }, []);
 
   const toggleDropdown = (name: string) => {
-    setDropdownOpen((prev) => (prev === name ? null : name)); // Toggle dropdown
+    setDropdownOpen((prev) => (prev === name ? null : name));
   };
 
   return (
-    <nav className="bg-transparent backdrop-blur-lg border border-white/20 text-slate-500 transition-all duration-300 shadow-lg">
+    <nav className="z-50 bg-transparent backdrop-blur-lg border border-white/20 text-slate-500 transition-all duration-300 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -44,7 +44,6 @@ const Navbar = () => {
               prefetch={true}
               className="text-3xl font-extrabold transition duration-300 hover:opacity-80 flex items-center space-x-2"
             >
-              
               <span>Elivra</span>
             </Link>
           </div>
@@ -82,22 +81,22 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 )}
-                {dropdownOpen === link.name && link.dropdownItems && (
-                  <div className="absolute left-0 mt-2 w-48 bg-transparent rounded-md shadow-lg z-10">
-                    {link.dropdownItems.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        prefetch={true}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-500 hover:text-white transition duration-300 rounded-md"
-                        onClick={handleLinkClick}
-                      >
-                        {item.icon && <item.icon className="mr-1 inline" />}
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+{dropdownOpen === link.name && link.dropdownItems && (
+  <div className="absolute left-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-100">
+    {link.dropdownItems.map((item) => (
+      <Link
+        key={item.href}
+        href={item.href}
+        prefetch={true}
+        className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-500 hover:text-white transition duration-300 rounded-md"
+        onClick={handleLinkClick}
+      >
+        {item.icon && <item.icon className="mr-1 inline" />}
+        {item.name}
+      </Link>
+    ))}
+  </div>
+)}
               </div>
             ))}
             {currentUser ? (
@@ -112,7 +111,9 @@ const Navbar = () => {
                     priority
                   />
                 )}
-                <span className="hidden lg:block text-white">{currentUser.displayName || "User"}</span>
+                <span className="hidden lg:block text-white">
+                  {currentUser.displayName || "User"}
+                </span>
                 <button
                   onClick={handleSignOut}
                   className="px-4 py-2 bg-red-600 text-white rounded-lg shadow-md transition duration-300 hover:bg-red-500 flex items-center space-x-2"

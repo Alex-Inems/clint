@@ -52,17 +52,18 @@ const HomePage = () => {
   return (
     <div>
       <HomeComponent
-        title="Welcome to elitra!"
-        description="elitra is designed to empower African SMEs with cutting-edge tools for managing payments, inventory, customer relationships, and more. Join us today and take your business to new heights!"
+        title="RETAIL"
+        subtitle=""
+        description="Join us today and take your business to new heights!"
         buttonText="Get Started"
-        imageSrc="/images/retail-hero.png" // Update with your actual image path
+        imageSrc="/images/hero1.png" // Update with your actual image path
         imageAlt="elitra Hero Image"
-        isImageFirst={false} // Set to true if you want the image first
+        
       />
 
       <CardGrid
         gridTitle="Empowering African SMEs"
-        gridDescription="elitra offers a comprehensive suite of tools tailored to help small and medium enterprises across Africa streamline operations, boost productivity, and achieve growth."
+        gridDescription="Comprehensive suite of tools."
         cardsData={cardsData}
       />
     </div>

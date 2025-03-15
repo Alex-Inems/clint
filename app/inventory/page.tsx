@@ -53,14 +53,15 @@ const Inventory = () => {
   return (
     <div>
       <HomeComponent
-        title="elivra Smart Inventory, say goodbye to spreadsheets with our cloud-based product."
-        description="Smart inventory management system to maximize your profits. elivra product inventory management system allows you to port products from your old POS online platform by importing a CSV file.
+        title="Smart Inventory."
+        subtitle=''
+        description=" maximize your profits.
 
-Plan purchases, export records to suppliers, track stock receipts, and manage vendor relationships."
+Plan purchases. export records to suppliers."
         buttonText="Sign In"
-        imageSrc="/images/inventory-hero.png" // Update with your actual image path
+        imageSrc="/images/2.jpg" // Update with your actual image path
         imageAlt="Image description"
-        isImageFirst={false} // Set to true if you want the image first
+     
       />
       <CardGrid
         gridTitle="Features"

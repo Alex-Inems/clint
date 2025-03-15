@@ -20,7 +20,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center">
+    <div className="relative w-full h-screen flex flex-col items-center justify-center">
+
       {/* Background Sliding Effect */}
       <motion.div
         className="absolute inset-0 flex w-[500%] h-full"
