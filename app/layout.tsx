@@ -7,8 +7,8 @@ import Navbar from "@/components/Navbar/Navbar";
 
 
 export const metadata: Metadata = {
-  title: "elivra",
-  description: "elivraing your business",
+  title: "",
+  description: "elevating your business",
 };
 
 export default function RootLayout({
