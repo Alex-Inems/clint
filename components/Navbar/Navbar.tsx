@@ -44,8 +44,7 @@ const Navbar = () => {
               prefetch={true}
               className="text-3xl font-extrabold transition duration-300 hover:opacity-80 flex items-center space-x-2"
             >
-              <span>Elivra</span>
-            </Link>
+              Elivra         </Link>
           </div>
 
           {/* Mobile Menu Button */}

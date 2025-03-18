@@ -48,7 +48,7 @@ const Distribution = () => {
       <RestaurantPage
         title="The right distribution channel that changes everything"
         description="Products are made available to all retailers."
-        imageUrl="/images/dist.avif" // Replace with your actual image path
+        imageUrl="/images/distribution.jpg" // Replace with your actual image path
       />
       <CardGrid
         gridTitle="Features"

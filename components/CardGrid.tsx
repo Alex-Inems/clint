@@ -1,14 +1,14 @@
-import React from 'react';
-import Card from './Card';
-import { IconType } from 'react-icons'; // Import IconType for typing
-import { FaRocket } from 'react-icons/fa';
-import Link from 'next/link';
+import React from "react";
+import Card from "./Card";
+import { IconType } from "react-icons";
+import { FaRocket } from "react-icons/fa";
+import Link from "next/link";
 
 interface CardData {
   title: string;
   description: string;
-  Icon: IconType; // Icon component for the card
-  color: string; // Color prop for the icon
+  Icon: IconType;
+  color: string;
 }
 
 interface CardGridProps {
@@ -19,69 +19,64 @@ interface CardGridProps {
 
 const CardGrid: React.FC<CardGridProps> = ({ gridTitle, gridDescription, cardsData }) => {
   return (
-    <div className="bg-white w-full p-4">
-      {/* Title and description above the cards */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4 tracking-wide">
-          {gridTitle.split(' ').map((word, index) => (
-            <span key={index} className="">
-              {word}{' '}
-            </span>
-          ))}
+    <div className="bg-gray-950 w-full p-6 text-white min-h-screen flex flex-col items-center">
+      {/* Title Section */}
+      <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text mb-3">
+          {gridTitle}
         </h2>
-        <p className="text-lg text-gray-600">{gridDescription}</p>
+        <p className="text-lg text-gray-400 max-w-2xl mx-auto">{gridDescription}</p>
       </div>
 
       {/* Card Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 shadow-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cardsData.map((card, index) => (
           <Card
             key={index}
             title={card.title}
             description={card.description}
             Icon={card.Icon}
-            color={card.color} // Pass the color prop to Card
+            color={card.color}
           />
         ))}
       </div>
 
-      {/* Sign-in Section */}
-      <div className="bg-[url('/images/nature.jpg')] bg-cover bg-center bg-no-repeat text-white p-8 mt-4 rounded-lg shadow-lg flex flex-col items-center text-center gap-6 relative">
-        <FaRocket className="absolute top-4 left-4 text-white text-3xl" />
-        <h3 className="text-4xl font-bold">Ready to Elevate Your Business?</h3>
-        <p className="text-lg mb-2 font-serif font-extralight">
-          Sign in to unlock exclusive features, tools, and insights that help you grow and manage your business effortlessly.
+      {/* Call-to-Action Section */}
+      <div className="relative w-full max-w-3xl mt-16 bg-gray-800 rounded-lg p-10 text-center shadow-lg overflow-hidden">
+        <FaRocket className="absolute top-4 left-4 text-green-400 text-4xl animate-bounce" />
+        <h3 className="text-3xl font-bold">Supercharge Your Business</h3>
+        <p className="text-gray-400 mt-2">
+          Sign in to unlock premium features and tools designed to boost your productivity.
         </p>
         <Link href="/auth">
-          <button className="px-8 py-4 bg-transparent text-white font-semibold rounded-lg shadow-border shadow-xl transition-all duration-300 hover:bg-transparent hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-400">
+          <button className="mt-6 px-6 py-3 text-lg bg-gradient-to-r from-green-500 to-blue-600 rounded-lg shadow-md hover:scale-105 transition-transform">
             Get Started Now
           </button>
         </Link>
       </div>
 
       {/* Footer Section */}
-      <footer className="bg-gray-900 text-white text-center  mt-6">
+      <footer className="w-full text-center mt-12 text-gray-500">
         <p className="text-sm">&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
-        <nav className="mt-4">
-          <Link href="/about" className="text-gray-400 hover:text-white mx-4">About</Link>
-          <Link href="/contact" className="text-gray-400 hover:text-white mx-4">Contact</Link>
-          <Link href="/privacy" className="text-gray-400 hover:text-white mx-4">Privacy Policy</Link>
+        <nav className="mt-4 space-x-6">
+          <Link href="/about" className="hover:text-white">About</Link>
+          <Link href="/contact" className="hover:text-white">Contact</Link>
+          <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
         </nav>
       </footer>
     </div>
   );
 };
 
-// Provide default props in case no data is passed
 CardGrid.defaultProps = {
-  gridTitle: 'Default Title',
-  gridDescription: 'Default description of the card grid',
+  gridTitle: "Empower Your Business",
+  gridDescription: "Discover the best tools and insights to grow your brand and maximize success.",
   cardsData: [
     {
-      title: 'Default Card',
-      description: 'This is a default card description.',
-      Icon: () => <div className="text-gray-400">Default Icon</div>, // Fallback icon if none provided
-      color: 'text-gray-400', // Default color
+      title: "Innovative Solutions",
+      description: "Cutting-edge technology to streamline your business processes.",
+      Icon: () => <div className="text-green-400">✨</div>,
+      color: "text-green-400",
     },
   ],
 };

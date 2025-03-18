@@ -44,11 +44,11 @@ const Restaurant = () => {
   ];
 
   return (
-    <div>
+    <div >
       <RestaurantPage
         title="Elevate Your Dining Experience"
         description="Effective and Reliable Restaurant Management System that offers great value to your business."
-        imageUrl="/images/dww.jpg" // Replace with your actual image path
+        imageUrl="/images/resturant.jpg" // Replace with your actual image path
       />
       <CardGrid
         gridTitle="Features"

@@ -59,7 +59,7 @@ const Inventory = () => {
 
 Plan purchases. export records to suppliers."
         buttonText="Sign In"
-        imageSrc="/images/2.jpg" // Update with your actual image path
+        imageSrc="/images/laptop.jpg" // Update with your actual image path
         imageAlt="Image description"
      
       />
