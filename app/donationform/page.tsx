@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
 
-const stripePaymentLink = "https://buy.stripe.com/test_xxx123abc"; // your Stripe payment link
+const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE"; // your Stripe payment link
 
 const DonationForm: React.FC = () => {
   const [name, setName] = useState("");
