@@ -22,7 +22,7 @@ export default function ContactPage() {
       <div className="w-full max-w-xl bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Contact Us</h1>
         <p className="text-sm text-gray-500 mb-8 text-center">
-          We'd love to hear from you. Please fill out the form below.
+          We&apos;d love to hear from you. Please fill out the form below.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
