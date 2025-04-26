@@ -42,7 +42,7 @@ const DonationHome: React.FC = () => {
         {/* Right - Image */}
         <div className="w-full md:w-1/2 h-[50vh] md:min-h-screen relative">
           <Image
-            src="/images/hop.jpg" // replace with actual image path
+            src="/images/ycl.jpg" // replace with actual image path
             alt="Hopeful family"
             fill
             className="object-cover"
