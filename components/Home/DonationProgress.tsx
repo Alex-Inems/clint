@@ -52,7 +52,7 @@ const DonationProgress: React.FC = () => {
   }
 
   return (
-    <section className="bg-white py-12 px-6 md:px-20 space-y-10">
+    <section className="bg-gray-100 py-12 px-6 md:px-20 space-y-10 ">
       {/* Progress Section */}
       <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Donation Goal</h2>
@@ -71,13 +71,13 @@ const DonationProgress: React.FC = () => {
 
       {/* Donor Comments */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-4">Messages from Donors</h3>
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Donors</h3>
         {donors.length === 0 ? (
           <p className="text-gray-500">No donations yet. Be the first to donate!</p>
         ) : (
           <ul className="space-y-4">
             {donors.map((donor, index) => (
-              <li key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm">
+              <li key={index} className="bg-white p-4 rounded-lg shadow-sm">
                 <p className="text-gray-800 font-medium">{donor.name}</p>
                 {donor.message && (
                   <p className="text-sm text-gray-600 mt-1">“{donor.message}”</p>
