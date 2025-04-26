@@ -1,5 +1,4 @@
 import React from "react";
-// /components/Footer.tsx
 import Link from "next/link";
 
 export default function Footer() {
@@ -11,6 +10,9 @@ export default function Footer() {
           <h1 className="text-2xl font-bold text-gray-900">Elivra</h1>
           <p className="text-sm text-gray-500 mt-2">
             Supporting Gaza and Palestine refugees through trusted donations.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">
+            Contact us at: <a href="mailto:support@elivra.org" className="hover:underline text-blue-600">support@elivra.org</a>
           </p>
         </div>
 
