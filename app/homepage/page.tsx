@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import DonationProgress from "@/components/Home/DonationProgress";
-import { MapPinIcon, UsersIcon } from '@heroicons/react/24/outline'; // Corrected import path
+import { MapPinIcon,} from '@heroicons/react/24/outline'; // Corrected import path
 
 const DonationHome: React.FC = () => {
   return (

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
+
 import Link from "next/link";
 import { LogIn } from "lucide-react"; // Icons
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+ 
 
   return (
     <nav className="z-50 bg-transparent backdrop-blur-lg border border-white/20 text-slate-500 transition-all duration-300 shadow-lg">
