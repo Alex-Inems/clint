@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthProvider"; // Ensure correct path
 import Navbar from "@/components/Navbar/Navbar";
-
+import Footer from "@/components/Footer";
 
 
 export const metadata: Metadata = {
@@ -25,6 +25,7 @@ export default function RootLayout({
         <Navbar />
       </div>
           {children} {/* Render child components/pages here */}
+          <Footer/>
         </AuthProvider>
 
       </body>
