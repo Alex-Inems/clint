@@ -12,7 +12,7 @@ export default function Footer() {
             Supporting Gaza and Palestine refugees through trusted donations.
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Contact us at: <a href="mailto:support@elivra.org" className="hover:underline text-blue-600">support@elivra.org</a>
+            Contact us at: <a href="mailto:support@elivra.net" className="hover:underline text-blue-600">support@elivra.org</a>
           </p>
         </div>
 
