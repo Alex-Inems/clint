@@ -4,10 +4,17 @@ import { useEffect, useState } from "react";
 import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
 import Link from "next/link";
 
+// Define the type for the donation data
+interface DonationData {
+  name: string;
+  amount: number;
+  message: string;
+}
+
 export default function SuccessPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [donationData, setDonationData] = useState<any>(null);
+  const [donationData, setDonationData] = useState<DonationData | null>(null); // Use the DonationData type
 
   useEffect(() => {
     // Retrieve the donation data from localStorage
