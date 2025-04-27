@@ -9,7 +9,7 @@ interface Donor {
   amount: number;
 }
 
-const GOAL = 1000;
+const GOAL = 100000;
 
 const DonationProgress: React.FC = () => {
   const [donors, setDonors] = useState<Donor[]>([]);

@@ -62,8 +62,9 @@ export default function SuccessPage() {
       {/* Show saving/loading state */}
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
 
+
       {/* Show error if saving fails */}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 hidden">{error}</p>}
 
       <Link
         href="/"
