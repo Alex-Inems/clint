@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
 
 const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE"; // your Stripe payment link
 
@@ -17,22 +16,18 @@ const DonationForm: React.FC = () => {
 
     setIsSubmitting(true);
 
-    try {
-      // Save to Firestore
-      await addDoc(collection(db, "donations"), {
+    // Save donation data to local storage before redirecting
+    localStorage.setItem(
+      "donationData",
+      JSON.stringify({
         name,
         amount: Number(amount),
         message,
-        createdAt: new Date(),
-      });
+      })
+    );
 
-      // Redirect to Stripe after successful save
-      window.location.href = stripePaymentLink;
-    } catch (error) {
-      console.error("Error saving donation:", error);
-      setIsSubmitting(false);
-      alert("Something went wrong. Please try again.");
-    }
+    // Redirect to Stripe payment link
+    window.location.href = stripePaymentLink;
   };
 
   return (
