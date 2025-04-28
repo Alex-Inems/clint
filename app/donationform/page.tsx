@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { db, collection, addDoc, serverTimestamp } from "@/firebaseConfig"; // make sure your firebaseConfig exports these
+// (if not, I can show you how to update it.)
 
-const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE"; // your Stripe payment link
+const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE";
 
 const DonationForm: React.FC = () => {
   const [name, setName] = useState("");
@@ -16,32 +18,33 @@ const DonationForm: React.FC = () => {
 
     setIsSubmitting(true);
 
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    const year = now.getFullYear();
-
-    let hours = now.getHours();
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // '0' should be '12'
-
-    const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
-
-    // Save donation data to local storage before redirecting
-    localStorage.setItem(
-      "donationData",
-      JSON.stringify({
+    try {
+      // Save donation data to Firestore
+      await addDoc(collection(db, "donations"), {
         name,
         amount: Number(amount),
         message,
-        submittedAt: formattedDateTime,
-      })
-    );
+        createdAt: serverTimestamp(), // ✅ Firestore will auto-generate server timestamp
+      });
 
-    // Redirect to Stripe payment link
-    window.location.href = stripePaymentLink;
+      // Save local backup in case of page reload (optional)
+      localStorage.setItem(
+        "donationData",
+        JSON.stringify({
+          name,
+          amount: Number(amount),
+          message,
+          createdAt: new Date().toISOString(), // store ISO string locally
+        })
+      );
+
+      // Redirect to Stripe payment
+      window.location.href = stripePaymentLink;
+    } catch (error) {
+      console.error("Failed to save donation:", error);
+      alert("Something went wrong while saving your donation. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   return (

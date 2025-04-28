@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { db, collection, getDocs } from "@/firebaseConfig"; // adjust path if different
+import { db, collection, getDocs } from "@/firebaseConfig";
+import { formatDistanceToNow } from "date-fns";
 
 interface Donor {
   name: string;
   message: string;
   amount: number;
-  submittedAt: string; // Added submittedAt
+  createdAt: Date; // 👈 store it as Date, not string
 }
 
 const GOAL = 100000;
@@ -27,7 +28,7 @@ const DonationProgress: React.FC = () => {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            submittedAt: data.submittedAt || "", // default to empty string if missing
+            createdAt: data.createdAt?.toDate?.() || new Date(), // 🔥 safely convert Firestore Timestamp
           };
         });
         setDonors(donorList);
@@ -87,11 +88,9 @@ const DonationProgress: React.FC = () => {
                 <p className="text-sm text-green-700 font-semibold mt-2">
                   Donated ${donor.amount}
                 </p>
-                {donor.submittedAt && (
-                  <p className="text-xs text-gray-500 mt-1">
-                    {donor.submittedAt}
-                  </p>
-                )}
+                <p className="text-xs text-gray-400 mt-1">
+                  {formatDistanceToNow(donor.createdAt, { addSuffix: true })}
+                </p>
               </li>
             ))}
           </ul>
