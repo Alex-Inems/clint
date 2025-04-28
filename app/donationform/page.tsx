@@ -16,6 +16,19 @@ const DonationForm: React.FC = () => {
 
     setIsSubmitting(true);
 
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = now.getFullYear();
+
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // '0' should be '12'
+
+    const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
+
     // Save donation data to local storage before redirecting
     localStorage.setItem(
       "donationData",
@@ -23,6 +36,7 @@ const DonationForm: React.FC = () => {
         name,
         amount: Number(amount),
         message,
+        submittedAt: formattedDateTime,
       })
     );
 

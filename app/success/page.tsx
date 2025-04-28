@@ -8,13 +8,14 @@ import Link from "next/link";
 interface DonationData {
   name: string;
   amount: number;
-  message: string;
+  message?: string;
+  submittedAt: string; // include submittedAt
 }
 
 export default function SuccessPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [donationData, setDonationData] = useState<DonationData | null>(null); // Use the DonationData type
+  const [donationData, setDonationData] = useState<DonationData | null>(null);
 
   useEffect(() => {
     // Retrieve the donation data from localStorage
@@ -35,8 +36,8 @@ export default function SuccessPage() {
           await addDoc(collection(db, "donations"), {
             name: donationData.name,
             amount: donationData.amount,
-            message: donationData.message,
-            createdAt: new Date(),
+            message: donationData.message || "",
+            submittedAt: donationData.submittedAt, // save submittedAt instead of using new Date()
           });
           // Remove the data from localStorage after saving it
           localStorage.removeItem("donationData");
@@ -55,13 +56,31 @@ export default function SuccessPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6">
       <h1 className="text-3xl font-bold text-green-600 mb-4">Thank you for your donation!</h1>
-      <p className="text-gray-700 mb-8 text-center">
+      <p className="text-gray-700 mb-4 text-center">
         Your support helps provide relief to Gaza and Palestine refugees. We deeply appreciate your generosity.
       </p>
 
+      {donationData && (
+        <div className="text-center mb-8">
+          <p className="text-gray-800">
+            <strong>Name:</strong> {donationData.name}
+          </p>
+          <p className="text-gray-800">
+            <strong>Amount:</strong> ${donationData.amount}
+          </p>
+          {donationData.message && (
+            <p className="text-gray-800">
+              <strong>Message:</strong> {donationData.message}
+            </p>
+          )}
+          <p className="text-gray-600 mt-2">
+            <strong>Submitted At:</strong> {donationData.submittedAt}
+          </p>
+        </div>
+      )}
+
       {/* Show saving/loading state */}
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
-
 
       {/* Show error if saving fails */}
       {error && <p className="text-red-500 hidden">{error}</p>}

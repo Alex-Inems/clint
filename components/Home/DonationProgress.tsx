@@ -7,6 +7,7 @@ interface Donor {
   name: string;
   message: string;
   amount: number;
+  submittedAt: string; // Added submittedAt
 }
 
 const GOAL = 100000;
@@ -26,6 +27,7 @@ const DonationProgress: React.FC = () => {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
+            submittedAt: data.submittedAt || "", // default to empty string if missing
           };
         });
         setDonors(donorList);
@@ -52,7 +54,7 @@ const DonationProgress: React.FC = () => {
   }
 
   return (
-    <section className="bg-gray-100 py-12 px-6 md:px-20 space-y-10 ">
+    <section className="bg-gray-100 py-12 px-6 md:px-20 space-y-10">
       {/* Progress Section */}
       <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Donation Goal</h2>
@@ -85,6 +87,11 @@ const DonationProgress: React.FC = () => {
                 <p className="text-sm text-green-700 font-semibold mt-2">
                   Donated ${donor.amount}
                 </p>
+                {donor.submittedAt && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    {donor.submittedAt}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
