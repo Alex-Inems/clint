@@ -9,7 +9,7 @@ interface DonationData {
   name: string;
   amount: number;
   message?: string;
-  submittedAt: string; // include submittedAt
+  createdAt: string; // use createdAt instead of submittedAt
 }
 
 export default function SuccessPage() {
@@ -37,7 +37,7 @@ export default function SuccessPage() {
             name: donationData.name,
             amount: donationData.amount,
             message: donationData.message || "",
-            submittedAt: donationData.submittedAt, // save submittedAt instead of using new Date()
+            createdAt: donationData.createdAt, // save createdAt instead of using new Date()
           });
           // Remove the data from localStorage after saving it
           localStorage.removeItem("donationData");
@@ -74,7 +74,7 @@ export default function SuccessPage() {
             </p>
           )}
           <p className="text-gray-600 mt-2">
-            <strong>Submitted At:</strong> {donationData.submittedAt}
+            <strong>Created At:</strong> {donationData.createdAt}
           </p>
         </div>
       )}
@@ -83,7 +83,7 @@ export default function SuccessPage() {
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
 
       {/* Show error if saving fails */}
-      {error && <p className="text-red-500 hidden">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
       <Link
         href="/"

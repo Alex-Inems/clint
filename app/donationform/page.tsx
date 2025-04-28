@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { db, collection, addDoc, serverTimestamp } from "@/firebaseConfig"; // make sure your firebaseConfig exports these
-// (if not, I can show you how to update it.)
 
 const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE";
 
@@ -19,15 +17,7 @@ const DonationForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Save donation data to Firestore
-      await addDoc(collection(db, "donations"), {
-        name,
-        amount: Number(amount),
-        message,
-        createdAt: serverTimestamp(), // ✅ Firestore will auto-generate server timestamp
-      });
-
-      // Save local backup in case of page reload (optional)
+      // Save donation data to localStorage
       localStorage.setItem(
         "donationData",
         JSON.stringify({
