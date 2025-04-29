@@ -32,6 +32,8 @@ const DonationProgress: React.FC = () => {
             createdAt: data.createdAt?.toDate?.() || new Date(), // 🔥 safely convert Firestore Timestamp
           };
         });
+            // Sort donors by 'createdAt' from oldest to newest
+    donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
 
         setDonors(donorList);
       } catch (err) {
