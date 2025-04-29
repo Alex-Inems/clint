@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { formatDistanceToNow } from "date-fns";
 
-interface DonationData {
+interface Donor {
   name: string;
   message: string;
   amount: number;
@@ -14,7 +14,7 @@ interface DonationData {
 const GOAL = 100000;
 
 const DonationProgress: React.FC = () => {
-  const [donors, setDonors] = useState<DonationData[]>([]);
+  const [donors, setDonors] = useState<Donor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [, setTimeUpdateTick] = useState(0); // Force rerender for time display
@@ -23,7 +23,7 @@ const DonationProgress: React.FC = () => {
     const fetchDonors = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "DonationData"));
-        let donorList: DonationData[] = querySnapshot.docs.map(doc => {
+        let donorList: Donor[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
             name: data.name,
