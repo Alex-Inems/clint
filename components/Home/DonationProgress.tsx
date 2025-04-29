@@ -30,9 +30,7 @@ const DonationProgress: React.FC = () => {
             message: data.message || "",
             amount: data.amount,
             // Handling both Firestore Timestamp and JavaScript Date
-            createdAt: data.createdAt?.seconds 
-              ? new Date(data.createdAt.seconds * 1000)  // Convert Firestore Timestamp to JavaScript Date
-              : new Date(data.createdAt), // If already a JavaScript Date
+            createdAt: data.createdAt?.toDate?.() || new Date(),
           };
         });
 
