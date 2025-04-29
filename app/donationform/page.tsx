@@ -24,7 +24,7 @@ const DonationForm: React.FC = () => {
           name,
           amount: Number(amount),
           message,
-          createdAt: new Date().toISOString(), // store ISO string locally
+          createdAt: Date.now(), // store as timestamp
         })
       );
 

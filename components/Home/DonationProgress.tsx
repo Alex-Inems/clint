@@ -17,7 +17,7 @@ const DonationProgress: React.FC = () => {
   const [donors, setDonors] = useState<Donor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [, setTimeUpdateTick] = useState(0); // Force rerender for time
+  const [, setTimeUpdateTick] = useState(0); // Force rerender for time display
 
   useEffect(() => {
     const fetchDonors = async () => {
@@ -29,14 +29,13 @@ const DonationProgress: React.FC = () => {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            // Handling both Firestore Timestamp and JavaScript Date
-             createdAt: data.createdAt?.toDate?.() || new Date(),
+            createdAt: data.createdAt.toDate(), // Convert Firestore Timestamp to JS Date
           };
         });
 
         // 🔥 Sort by latest & show only top 7
-        donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-        donorList = donorList.slice(0, 7); // Show top 7 donors
+        donorList.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        donorList = donorList.slice(0, 7); // Most recent 7 donors
 
         setDonors(donorList);
       } catch (err) {
@@ -49,9 +48,9 @@ const DonationProgress: React.FC = () => {
 
     fetchDonors();
 
-    // Rerender every minute to update "time ago"
+    // Rerender every 60s to refresh relative time
     const interval = setInterval(() => {
-      setTimeUpdateTick(tick => tick + 1);
+      setTimeUpdateTick(prev => prev + 1);
     }, 60000);
 
     return () => clearInterval(interval);

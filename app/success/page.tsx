@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
+import { db, collection, addDoc } from "@/firebaseConfig"; // adjust this path if needed
 import Link from "next/link";
 
-// Define the type for the donation data
+// Adjusted type to reflect timestamp format
 interface DonationData {
   name: string;
   amount: number;
   message?: string;
-  createdAt: string; // use createdAt instead of submittedAt
+  createdAt: number; // timestamp
 }
 
 export default function SuccessPage() {
@@ -18,17 +18,16 @@ export default function SuccessPage() {
   const [donationData, setDonationData] = useState<DonationData | null>(null);
 
   useEffect(() => {
-    // Retrieve the donation data from localStorage
     const savedDonationData = localStorage.getItem("donationData");
     if (savedDonationData) {
-      setDonationData(JSON.parse(savedDonationData));
+      const parsedData: DonationData = JSON.parse(savedDonationData);
+      setDonationData(parsedData);
     } else {
       setError("No donation data found.");
     }
   }, []);
 
   useEffect(() => {
-    // Save the donation data to Firebase when the component is mounted
     if (donationData) {
       const saveToFirebase = async () => {
         try {
@@ -37,9 +36,8 @@ export default function SuccessPage() {
             name: donationData.name,
             amount: donationData.amount,
             message: donationData.message || "",
-            createdAt: donationData.createdAt, // save createdAt instead of using new Date()
+            createdAt: donationData.createdAt, // timestamp
           });
-          // Remove the data from localStorage after saving it
           localStorage.removeItem("donationData");
         } catch (error) {
           console.error("Error saving donation:", error);
@@ -74,15 +72,13 @@ export default function SuccessPage() {
             </p>
           )}
           <p className="text-gray-600 mt-2">
-            <strong>Created At:</strong> {donationData.createdAt}
+            <strong>Created At:</strong>{" "}
+            {new Date(donationData.createdAt).toLocaleString()}
           </p>
         </div>
       )}
 
-      {/* Show saving/loading state */}
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
-
-      {/* Show error if saving fails */}
       {error && <p className="text-red-500">{error}</p>}
 
       <Link
