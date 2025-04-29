@@ -37,9 +37,8 @@ const DonationProgress: React.FC = () => {
       // Compare time values of Date objects
       return a.createdAt.getTime() - b.createdAt.getTime();
     });
- // Limit the list to the latest 7 donors
- const limitedDonors = donorList.slice(-7); // This takes the last 7 donors (most recent)
- setDonors(limitedDonors);
+
+        setDonors(donorList);
       } catch (err) {
         console.error("Failed to fetch donors:", err);
         setError("Failed to load donor data. Please try again later.");
