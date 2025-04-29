@@ -17,6 +17,7 @@ const DonationProgress: React.FC = () => {
   const [donors, setDonors] = useState<Donor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [, setTimeUpdateTick] = useState(0); // Force rerender for time display
 
   useEffect(() => {
     const fetchDonors = async () => {
@@ -31,6 +32,7 @@ const DonationProgress: React.FC = () => {
             createdAt: data.createdAt?.toDate?.() || new Date(), // 🔥 safely convert Firestore Timestamp
           };
         });
+
         setDonors(donorList);
       } catch (err) {
         console.error("Failed to fetch donors:", err);
@@ -41,7 +43,16 @@ const DonationProgress: React.FC = () => {
     };
 
     fetchDonors();
+ 
+    // Rerender every 60s to refresh relative time
+    const interval = setInterval(() => {
+      setTimeUpdateTick(prev => prev + 1);
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
+
+  
 
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
   const percentage = Math.min((totalRaised / GOAL) * 100, 100);
