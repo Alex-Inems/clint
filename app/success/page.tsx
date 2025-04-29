@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
 import Link from "next/link";
