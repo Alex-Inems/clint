@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { db, collection, addDoc } from "@/firebaseConfig"; // adjust path if different
 import Link from "next/link";
@@ -21,7 +19,10 @@ export default function SuccessPage() {
     // Retrieve the donation data from localStorage
     const savedDonationData = localStorage.getItem("donationData");
     if (savedDonationData) {
-      setDonationData(JSON.parse(savedDonationData));
+      const parsedDonationData = JSON.parse(savedDonationData);
+      // Convert the createdAt string to a Date object if necessary
+      parsedDonationData.createdAt = new Date(parsedDonationData.createdAt).toISOString();
+      setDonationData(parsedDonationData);
     } else {
       setError("No donation data found.");
     }
@@ -37,7 +38,7 @@ export default function SuccessPage() {
             name: donationData.name,
             amount: donationData.amount,
             message: donationData.message || "",
-            createdAt: donationData.createdAt, // save createdAt instead of using new Date()
+            createdAt: donationData.createdAt, // save createdAt (ISO string) to Firebase
           });
           // Remove the data from localStorage after saving it
           localStorage.removeItem("donationData");
@@ -74,7 +75,7 @@ export default function SuccessPage() {
             </p>
           )}
           <p className="text-gray-600 mt-2">
-            <strong>Created At:</strong> {donationData.createdAt}
+            <strong>Created At:</strong> {new Date(donationData.createdAt).toLocaleString()}
           </p>
         </div>
       )}
