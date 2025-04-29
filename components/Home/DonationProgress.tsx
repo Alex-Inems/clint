@@ -36,7 +36,7 @@ const DonationProgress: React.FC = () => {
         // 🔥 Sort by latest & show only top 10
         donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
 
-        donorList = donorList.slice(0, 10);
+        donorList = donorList.slice(0, 7);
 
         setDonors(donorList);
       } catch (err) {
