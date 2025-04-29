@@ -4,38 +4,39 @@ import React, { useEffect, useState } from "react";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { formatDistanceToNow } from "date-fns";
 
-interface Donor {
+interface DonationData {
   name: string;
-  message: string;
   amount: number;
-  createdAt: Date;
+  message?: string;
+  createdAt: string; // createdAt is a string (ISO string or timestamp)
 }
 
 const GOAL = 100000;
 
 const DonationProgress: React.FC = () => {
-  const [donors, setDonors] = useState<Donor[]>([]);
+  const [donors, setDonors] = useState<DonationData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [, setTimeUpdateTick] = useState(0); // Force rerender for time
 
   useEffect(() => {
     const fetchDonors = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "donations"));
-        let donorList: Donor[] = querySnapshot.docs.map(doc => {
+        let donorList: DonationData[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            // Handling both Firestore Timestamp and JavaScript Date
-            createdAt: data.createdAt?.toDate?.() || new Date(),
+            // Keep createdAt as string (Firebase stores it as string)
+            createdAt: data.createdAt,
           };
         });
 
         // 🔥 Sort by latest & show only top 7
-        donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        donorList.sort((a, b) => {
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+        });
         donorList = donorList.slice(0, 7); // Show top 7 donors
 
         setDonors(donorList);
@@ -48,13 +49,6 @@ const DonationProgress: React.FC = () => {
     };
 
     fetchDonors();
-
-    // Rerender every minute to update "time ago"
-    const interval = setInterval(() => {
-      setTimeUpdateTick(tick => tick + 1);
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, []);
 
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
@@ -103,7 +97,8 @@ const DonationProgress: React.FC = () => {
                   Donated ${donor.amount}
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
-                  {formatDistanceToNow(donor.createdAt, { addSuffix: true })}
+                  {/* Always compare to current time */}
+                  {formatDistanceToNow(new Date(donor.createdAt), { addSuffix: true })}
                 </p>
               </li>
             ))}
