@@ -22,7 +22,7 @@ const DonationProgress: React.FC = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "donations"));
+        const querySnapshot = await getDocs(collection(db, "DonationData"));
         let donorList: DonationData[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
