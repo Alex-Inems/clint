@@ -29,16 +29,14 @@ const DonationProgress: React.FC = () => {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            // Handling both Firestore Timestamp and JavaScript Date
-            createdAt: data.createdAt?.seconds 
-              ? new Date(data.createdAt.seconds * 1000)  // Convert Firestore Timestamp to JavaScript Date
-              : new Date(data.createdAt), // If already a JavaScript Date
+            createdAt: data.createdAt?.toDate?.() || new Date(),
           };
         });
 
-        // 🔥 Sort by latest & show only top 7
+        // 🔥 Sort by latest & show only top 10
         donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-        donorList = donorList.slice(0, 7); // Show top 7 donors
+
+        donorList = donorList.slice(0, 7);
 
         setDonors(donorList);
       } catch (err) {
