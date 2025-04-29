@@ -4,39 +4,33 @@ import React, { useEffect, useState } from "react";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { formatDistanceToNow } from "date-fns";
 
-interface DonationData {
+interface Donor {
   name: string;
   message: string;
   amount: number;
-  createdAt: Date;
+  createdAt: Date; // 👈 store it as Date, not string
 }
 
 const GOAL = 100000;
 
 const DonationProgress: React.FC = () => {
-  const [donors, setDonors] = useState<DonationData[]>([]);
+  const [donors, setDonors] = useState<Donor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [, setTimeUpdateTick] = useState(0); // Force rerender for time display
 
   useEffect(() => {
     const fetchDonors = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "donations"));
-        let donorList: DonationData[] = querySnapshot.docs.map(doc => {
+        const donorList: Donor[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            createdAt: data.createdAt.toDate(), // Convert Firestore Timestamp to JS Date
+            createdAt: data.createdAt?.toDate?.() || new Date(), // 🔥 safely convert Firestore Timestamp
           };
         });
-
-        // 🔥 Sort by latest & show only top 7
-        donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
-        donorList = donorList.slice(0, 7); // Most recent 7 donors
-
         setDonors(donorList);
       } catch (err) {
         console.error("Failed to fetch donors:", err);
@@ -47,13 +41,6 @@ const DonationProgress: React.FC = () => {
     };
 
     fetchDonors();
-
-    // Rerender every 60s to refresh relative time
-    const interval = setInterval(() => {
-      setTimeUpdateTick(prev => prev + 1);
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, []);
 
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
@@ -69,7 +56,7 @@ const DonationProgress: React.FC = () => {
 
   return (
     <section className="bg-gray-100 py-12 px-6 md:px-20 space-y-10">
-      {/* Progress Bar */}
+      {/* Progress Section */}
       <div>
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Donation Goal</h2>
         <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
@@ -85,9 +72,9 @@ const DonationProgress: React.FC = () => {
         </p>
       </div>
 
-      {/* Donor List */}
+      {/* Donor Comments */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-4">Recent Donors</h3>
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Donors</h3>
         {donors.length === 0 ? (
           <p className="text-gray-500">No donations yet. Be the first to donate!</p>
         ) : (
