@@ -25,20 +25,30 @@ const DonationProgress: React.FC = () => {
         const querySnapshot = await getDocs(collection(db, "donations"));
         const donorList: Donor[] = querySnapshot.docs.map(doc => {
           const data = doc.data();
+          let createdAt: Date;
+
+          // Check if createdAt is a Firestore Timestamp
+          if (data.createdAt && data.createdAt.toDate) {
+            createdAt = data.createdAt.toDate(); // Firestore Timestamp
+          } else if (typeof data.createdAt === "number") {
+            createdAt = new Date(data.createdAt); // Unix timestamp (number)
+          } else {
+            createdAt = new Date(); // Default to current date if invalid or missing
+          }
+
           return {
             name: data.name,
             message: data.message || "",
             amount: data.amount,
-            createdAt: data.createdAt?.toDate?.() || new Date(), // 🔥 safely convert Firestore Timestamp
+            createdAt: createdAt,
           };
         });
-            // Ensure createdAt is a valid Date object and sort by it
-    donorList.sort((a, b) => {
-      // Compare time values of Date objects
-      return a.createdAt.getTime() - b.createdAt.getTime();
-    });
 
-        setDonors(donorList);
+        // Sort by createdAt in descending order (most recent first)
+        donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+
+        // Limit to the first 7 most recent donors
+        setDonors(donorList.slice(0, 7));
       } catch (err) {
         console.error("Failed to fetch donors:", err);
         setError("Failed to load donor data. Please try again later.");
@@ -48,7 +58,7 @@ const DonationProgress: React.FC = () => {
     };
 
     fetchDonors();
- 
+
     // Rerender every 60s to refresh relative time
     const interval = setInterval(() => {
       setTimeUpdateTick(prev => prev + 1);
@@ -56,8 +66,6 @@ const DonationProgress: React.FC = () => {
 
     return () => clearInterval(interval);
   }, []);
-
-  
 
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
   const percentage = Math.min((totalRaised / GOAL) * 100, 100);

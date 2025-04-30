@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db, collection, addDoc } from "@/firebaseConfig"; // adjust this path if needed
+import { db, collection, addDoc, Timestamp } from "@/firebaseConfig"; // Ensure Timestamp is imported from Firebase
 import Link from "next/link";
 
 // Adjusted type to reflect timestamp format
@@ -32,11 +32,12 @@ export default function SuccessPage() {
       const saveToFirebase = async () => {
         try {
           setIsSaving(true);
+          // Use Firebase Timestamp for createdAt
           await addDoc(collection(db, "donations"), {
             name: donationData.name,
             amount: donationData.amount,
             message: donationData.message || "",
-            createdAt: donationData.createdAt, // timestamp
+            createdAt: Timestamp.fromMillis(donationData.createdAt), // Convert to Firebase Timestamp
           });
           localStorage.removeItem("donationData");
         } catch (error) {
@@ -79,7 +80,7 @@ export default function SuccessPage() {
       )}
 
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 hidden">{error}</p>}
 
       <Link
         href="/"
