@@ -45,7 +45,7 @@ const DonationProgress: React.FC = () => {
         });
 
         // Sort by createdAt in descending order (most recent first)
-        donorList.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+        donorList.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
 
         // Limit to the first 7 most recent donors
         setDonors(donorList.slice(0, 7));
