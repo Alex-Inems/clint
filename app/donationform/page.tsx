@@ -53,21 +53,21 @@ const DonationForm: React.FC = () => {
           <input
             type="number"
             placeholder="Amount (USD)"
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
           />
           <textarea
             placeholder="Leave a message (optional)"
-            className="w-full p-3 border rounded-md h-24 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-3 border rounded-md h-24 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-500 transition disabled:opacity-50"
+            className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-500 transition disabled:opacity-50"
           >
             {isSubmitting ? "Saving..." : "Donate Now"}
           </button>

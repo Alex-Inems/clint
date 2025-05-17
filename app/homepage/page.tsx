@@ -23,7 +23,7 @@ const DonationHome: React.FC = () => {
               <MapPinIcon className="h-5 w-5 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-gray-800">Julia Purosky</h2>
+              <h2 className="text-lg font-semibold text-gray-800">Uta Benkelberg</h2>
               <p className="text-sm text-gray-600">Gaza, Palestine</p>
             </div>
           </div>
