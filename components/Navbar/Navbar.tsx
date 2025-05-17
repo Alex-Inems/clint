@@ -2,7 +2,7 @@
 
 
 import Link from "next/link";
-import { LogIn } from "lucide-react"; // Icons
+
 
 const Navbar = () => {
  
