@@ -7,12 +7,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Logo and brief text */}
         <div className="mb-6 md:mb-0 text-center md:text-left">
-          <h1 className="text-2xl font-bold text-gray-900">Elivra</h1>
+          <h1 className="text-2xl font-bold text-gray-900">donatr</h1>
           <p className="text-sm text-gray-500 mt-2">
             Supporting Gaza and Palestine refugees through trusted donations.
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Contact us at: <a href="mailto:support@elivra.net" className="hover:underline text-blue-600">support@elivra.net</a>
+            Contact us at: <a href="mailto:support@donatr.net" className="hover:underline text-blue-600">support@donatr.net</a>
           </p>
         </div>
 
@@ -29,7 +29,7 @@ export default function Footer() {
 
       {/* Bottom Note */}
       <div className="text-center text-xs text-gray-400 mt-8">
-        &copy; {new Date().getFullYear()} Elivra. All rights reserved.
+        &copy; {new Date().getFullYear()} donatr. All rights reserved.
       </div>
     </footer>
   );
