@@ -29,7 +29,7 @@ const Navbar = () => {
               prefetch={true}
               className="px-4 py-2 bg-blue-600 text-white border border-white rounded-lg shadow-md transition duration-300 hover:bg-white hover:text-blue-700 flex items-center space-x-2"
             >
-              {/* <LogIn className="w-4 h-4" /> */}
+              
               <span>Donate</span>
             </Link>
           </div>
