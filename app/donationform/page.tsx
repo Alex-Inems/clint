@@ -52,7 +52,7 @@ const DonationForm: React.FC = () => {
           />
           <input
             type="number"
-            placeholder="Amount (USD)"
+            placeholder="Amount (EUR)"
             className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
