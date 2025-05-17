@@ -18,7 +18,7 @@ const Navbar = () => {
               prefetch={true}
               className="text-3xl font-extrabold transition duration-300 hover:opacity-80 flex items-center space-x-2"
             >
-              Elivra
+              Donatr
             </Link>
           </div>
 
