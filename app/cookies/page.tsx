@@ -20,7 +20,7 @@ export default function CookiesPage() {
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Contact</h2>
       <p className="mb-4">
-        Questions about our Cookie Policy? Email support@donatr.net
+        Questions about our Cookie Policy? Email support@donatr.live
       </p>
     </main>
   );

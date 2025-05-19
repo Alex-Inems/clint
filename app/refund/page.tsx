@@ -20,7 +20,7 @@ export default function RefundPage() {
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Contact</h2>
       <p className="mb-4">
-        Questions about refunds? Email support@donatr.net
+        Questions about refunds? Email support@donatr.live
       </p>
     </main>
   );
