@@ -54,7 +54,7 @@ export default function SuccessPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6">
-      <h1 className="text-3xl font-bold text-green-600 mb-4">Thank you for your donation!</h1>
+      <h1 className="text-3xl font-bold text-blue-600 mb-4">Thank you for your donation!</h1>
       <p className="text-gray-700 mb-4 text-center">
         Your support helps provide relief to Gaza and Palestine refugees. We deeply appreciate your generosity.
       </p>
@@ -84,7 +84,7 @@ export default function SuccessPage() {
 
       <Link
         href="/"
-        className="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+        className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
       >
         Back to Home
       </Link>

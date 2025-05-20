@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const stripePaymentLink = "https://buy.stripe.com/aEUdTKeke6nXfnOaEE";
+const stripePaymentLink = "https://buy.stripe.com/28EcN48h06Yvg5PbqT2go00";
 
 const DonationForm: React.FC = () => {
   const [name, setName] = useState("");
