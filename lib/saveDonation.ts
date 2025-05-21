@@ -1,21 +1,8 @@
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
-import { initializeApp, getApps } from "firebase/app";
-import { v4 as uuidv4 } from "uuid";
+// src/lib/saveDonation.ts or similar
 
-// Your Firebase config - replace with your actual config
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  // ...
-};
-
-// Initialize Firebase app if not already initialized
-if (!getApps().length) {
-  initializeApp(firebaseConfig);
-}
-
-const db = getFirestore();
+import { db } from '../firebaseConfig'; // ✅ re-use from central config
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 export type DonationData = {
   id: string;
