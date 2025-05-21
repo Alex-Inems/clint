@@ -14,34 +14,59 @@ const DonationForm: React.FC = () => {
 
   const hasSavedToDb = useRef(false);
 
-  // Check on mount if donation should be saved based on 4-minute return logic
-  useEffect(() => {
-    const donationDataJson = localStorage.getItem("donationData");
-    if (!donationDataJson) return;
+  // Function to check if donation should be saved to DB
+  const trySaveDonationIfNeeded = async () => {
+    const timeLeftPageStr = localStorage.getItem("timeLeftPage");
+    if (!timeLeftPageStr) return;
 
-    const donationData: DonationData = JSON.parse(donationDataJson);
+    const timeLeftPage = Number(timeLeftPageStr);
+    const timeReturned = Date.now();
+    const timeAway = timeReturned - timeLeftPage;
 
-    if (!hasSavedToDb.current && !donationData.savedToDb) {
-      const timeSinceCreation = Date.now() - donationData.createdAt;
+    if (timeAway >= 60000) { // 1 minute
+      const donationDataJson = localStorage.getItem("donationData");
+      if (!donationDataJson) return;
 
-      // Only save if at least 4 minutes (240000 ms) have passed
-      if (timeSinceCreation >= 160000) {
-        (async () => {
-          try {
-            await saveDonation(donationData);
-            hasSavedToDb.current = true;
+      const donationData: DonationData = JSON.parse(donationDataJson);
 
-            localStorage.setItem(
-              "donationData",
-              JSON.stringify({ ...donationData, savedToDb: true })
-            );
-            console.log("Donation saved to DB after returning from Stripe.");
-          } catch (error) {
-            console.error("Failed to save donation after return:", error);
-          }
-        })();
+      if (!hasSavedToDb.current && !donationData.savedToDb) {
+        try {
+          await saveDonation(donationData);
+          hasSavedToDb.current = true;
+
+          localStorage.setItem(
+            "donationData",
+            JSON.stringify({ ...donationData, savedToDb: true })
+          );
+          console.log("Donation saved to DB after returning from Stripe.");
+        } catch (error) {
+          console.error("Failed to save donation after return:", error);
+        }
       }
     }
+  };
+
+  useEffect(() => {
+    // Check on mount if user already returned after 2 mins
+    trySaveDonationIfNeeded();
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") {
+        // Save timestamp when user leaves the page
+        localStorage.setItem("timeLeftPage", Date.now().toString());
+      }
+
+      if (document.visibilityState === "visible") {
+        // User returned, try saving if 2 mins elapsed
+        trySaveDonationIfNeeded();
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,6 +87,10 @@ const DonationForm: React.FC = () => {
       };
 
       localStorage.setItem("donationData", JSON.stringify(donationData));
+      // Set leave timestamp immediately before redirecting
+      localStorage.setItem("timeLeftPage", Date.now().toString());
+
+      // Redirect to Stripe checkout
       window.location.href = stripePaymentLink;
     } catch (error) {
       console.error("Failed to save donation:", error);
@@ -111,5 +140,3 @@ const DonationForm: React.FC = () => {
 };
 
 export default DonationForm;
-
-
