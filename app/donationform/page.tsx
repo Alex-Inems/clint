@@ -25,7 +25,7 @@ const DonationForm: React.FC = () => {
       const timeSinceCreation = Date.now() - donationData.createdAt;
 
       // Only save if at least 4 minutes (240000 ms) have passed
-      if (timeSinceCreation >= 240000) {
+      if (timeSinceCreation >= 160000) {
         (async () => {
           try {
             await saveDonation(donationData);
