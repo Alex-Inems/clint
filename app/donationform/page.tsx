@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { saveDonation, DonationData } from "@/lib/saveDonation";
 
 const stripePaymentLink = "https://buy.stripe.com/28EcN48h06Yvg5PbqT2go00";
 
@@ -10,6 +12,38 @@ const DonationForm: React.FC = () => {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const hasSavedToDb = useRef(false);
+
+  // Check on mount if donation should be saved based on 4-minute return logic
+  useEffect(() => {
+    const donationDataJson = localStorage.getItem("donationData");
+    if (!donationDataJson) return;
+
+    const donationData: DonationData = JSON.parse(donationDataJson);
+
+    if (!hasSavedToDb.current && !donationData.savedToDb) {
+      const timeSinceCreation = Date.now() - donationData.createdAt;
+
+      // Only save if at least 4 minutes (240000 ms) have passed
+      if (timeSinceCreation >= 240000) {
+        (async () => {
+          try {
+            await saveDonation(donationData);
+            hasSavedToDb.current = true;
+
+            localStorage.setItem(
+              "donationData",
+              JSON.stringify({ ...donationData, savedToDb: true })
+            );
+            console.log("Donation saved to DB after returning from Stripe.");
+          } catch (error) {
+            console.error("Failed to save donation after return:", error);
+          }
+        })();
+      }
+    }
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !amount) return;
@@ -17,18 +51,17 @@ const DonationForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Save donation data to localStorage
-      localStorage.setItem(
-        "donationData",
-        JSON.stringify({
-          name,
-          amount: Number(amount),
-          message,
-          createdAt: Date.now(), // store as timestamp
-        })
-      );
+      const id = uuidv4();
+      const donationData: DonationData = {
+        id,
+        name,
+        amount: Number(amount),
+        message,
+        createdAt: Date.now(),
+        savedToDb: false,
+      };
 
-      // Redirect to Stripe payment
+      localStorage.setItem("donationData", JSON.stringify(donationData));
       window.location.href = stripePaymentLink;
     } catch (error) {
       console.error("Failed to save donation:", error);
@@ -78,3 +111,5 @@ const DonationForm: React.FC = () => {
 };
 
 export default DonationForm;
+
+

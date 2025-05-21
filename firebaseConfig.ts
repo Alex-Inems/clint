@@ -1,7 +1,7 @@
 // src/firebase-config.js
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs, doc, getDoc,Timestamp } from 'firebase/firestore'; // Firestore methods
+import { getFirestore, collection, addDoc, getDocs, doc, getDoc,Timestamp, setDoc } from 'firebase/firestore'; // Firestore methods
 
 // Firebase configuration object
 const firebaseConfig = {
@@ -22,4 +22,4 @@ const googleProvider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 // Export the auth, Google provider, Firestore instance, and Firestore methods
-export { auth, googleProvider, db, collection, addDoc, getDocs, doc, getDoc, Timestamp };
+export { auth, googleProvider, db, collection, addDoc, getDocs, doc, setDoc, getDoc, Timestamp };

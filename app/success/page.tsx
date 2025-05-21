@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db, collection, addDoc, Timestamp } from "@/firebaseConfig"; // Ensure Timestamp is imported from Firebase
+import {
+  db,
+  doc,
+  getDoc,
+  setDoc,
+  Timestamp,
+} from "@/firebaseConfig";
 import Link from "next/link";
 
-// Adjusted type to reflect timestamp format
 interface DonationData {
+  id: string;
   name: string;
   amount: number;
   message?: string;
-  createdAt: number; // timestamp
+  createdAt: number; // timestamp in ms
 }
 
 export default function SuccessPage() {
@@ -20,8 +26,12 @@ export default function SuccessPage() {
   useEffect(() => {
     const savedDonationData = localStorage.getItem("donationData");
     if (savedDonationData) {
-      const parsedData: DonationData = JSON.parse(savedDonationData);
-      setDonationData(parsedData);
+      try {
+        const parsedData: DonationData = JSON.parse(savedDonationData);
+        setDonationData(parsedData);
+      } catch {
+        setError("Invalid donation data.");
+      }
     } else {
       setError("No donation data found.");
     }
@@ -32,14 +42,24 @@ export default function SuccessPage() {
       const saveToFirebase = async () => {
         try {
           setIsSaving(true);
-          // Use Firebase Timestamp for createdAt
-          await addDoc(collection(db, "donations"), {
+
+          const docRef = doc(db, "donations", donationData.id);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            console.log("Donation already exists in database.");
+            return;
+          }
+
+          await setDoc(docRef, {
             name: donationData.name,
             amount: donationData.amount,
             message: donationData.message || "",
-            createdAt: Timestamp.fromMillis(donationData.createdAt), // Convert to Firebase Timestamp
+            createdAt: Timestamp.fromMillis(donationData.createdAt),
           });
+
           localStorage.removeItem("donationData");
+          setError(null);
         } catch (error) {
           console.error("Error saving donation:", error);
           setError("Failed to save donation data.");
@@ -53,34 +73,27 @@ export default function SuccessPage() {
   }, [donationData]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-6 py-10">
       <h1 className="text-3xl font-bold text-blue-600 mb-4">Thank you for your donation!</h1>
-      <p className="text-gray-700 mb-4 text-center">
+      <p className="text-gray-700 mb-6 text-center max-w-md">
         Your support helps provide relief to Gaza and Palestine refugees. We deeply appreciate your generosity.
       </p>
 
       {donationData && (
         <div className="text-center mb-8">
-          <p className="text-gray-800">
-            <strong>Name:</strong> {donationData.name}
-          </p>
-          <p className="text-gray-800">
-            <strong>Amount:</strong> ${donationData.amount}
-          </p>
+          <p className="text-gray-800"><strong>Name:</strong> {donationData.name}</p>
+          <p className="text-gray-800"><strong>Amount:</strong> €{donationData.amount}</p>
           {donationData.message && (
-            <p className="text-gray-800">
-              <strong>Message:</strong> {donationData.message}
-            </p>
+            <p className="text-gray-800"><strong>Message:</strong> {donationData.message}</p>
           )}
           <p className="text-gray-600 mt-2">
-            <strong>Created At:</strong>{" "}
-            {new Date(donationData.createdAt).toLocaleString()}
+            <strong>Created At:</strong> {new Date(donationData.createdAt).toLocaleString()}
           </p>
         </div>
       )}
 
       {isSaving && <p className="text-gray-500">Saving your donation...</p>}
-      {error && <p className="text-red-500 hidden">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
       <Link
         href="/"
