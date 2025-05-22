@@ -67,38 +67,40 @@ const DonationProgress: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    async function saveIfNeeded() {
+    async function saveIfValidReturn() {
       const donationDataJson = localStorage.getItem("donationData");
       if (!donationDataJson) return;
 
-      const donationData: DonationData = JSON.parse(donationDataJson);
+      const donationData: DonationData & { returnedTooEarly?: boolean } = JSON.parse(donationDataJson);
+      if (hasSavedToDb.current || donationData.savedToDb || donationData.returnedTooEarly) return;
 
-      if (hasSavedToDb.current || donationData.savedToDb) return;
+      const createdAt = new Date(donationData.createdAt);
+      const now = new Date();
+      const diffInMinutes = (now.getTime() - createdAt.getTime()) / 1000 / 60;
 
-      const now = Date.now();
-      const createdAt = donationData.createdAt
-        ? new Date(donationData.createdAt).getTime()
-        : now;
-
-      const FIVE_MINUTES = 5 * 60 * 1000;
-      const hasBeenFiveMinutes = now - createdAt >= FIVE_MINUTES;
-
-      if (!hasBeenFiveMinutes) return;
-
-      try {
-        await saveDonation(donationData);
-        hasSavedToDb.current = true;
+      if (diffInMinutes >= 4) {
+        try {
+          await saveDonation(donationData);
+          hasSavedToDb.current = true;
+          localStorage.setItem(
+            "donationData",
+            JSON.stringify({ ...donationData, savedToDb: true })
+          );
+          console.log("Donation saved to DB on homepage after 5+ mins.");
+        } catch (error) {
+          console.error("Failed to save donation on homepage:", error);
+        }
+      } else {
+        // ❌ Mark this donation as invalid for future saves
         localStorage.setItem(
           "donationData",
-          JSON.stringify({ ...donationData, savedToDb: true })
+          JSON.stringify({ ...donationData, returnedTooEarly: true })
         );
-        console.log("Donation saved to DB on homepage after 5+ minutes.");
-      } catch (error) {
-        console.error("Failed to save donation on homepage:", error);
+        console.log("Returned too early — donation will never be saved.");
       }
     }
 
-    saveIfNeeded();
+    saveIfValidReturn();
   }, []);
 
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
