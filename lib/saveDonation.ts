@@ -1,8 +1,5 @@
-// src/lib/saveDonation.ts or similar
-
-import { db } from '../firebaseConfig'; // ✅ re-use from central config
+import { db } from '../firebaseConfig';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid';
 
 export type DonationData = {
   id: string;
