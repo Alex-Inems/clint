@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { formatDistanceToNow } from "date-fns";
-import { saveDonation, DonationData } from "@/lib/saveDonation"; // import your saveDonation function
+import { saveDonation, DonationData } from "@/lib/saveDonation";
 
 interface Donor {
   name: string;
@@ -21,8 +21,6 @@ const DonationProgress: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [, setTimeUpdateTick] = useState(0);
-
-  // To track if donation has been saved during this session
   const hasSavedToDb = useRef(false);
 
   useEffect(() => {
@@ -68,7 +66,6 @@ const DonationProgress: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // New effect: Save donation from localStorage if exists and not saved yet
   useEffect(() => {
     async function saveIfNeeded() {
       const donationDataJson = localStorage.getItem("donationData");
@@ -78,6 +75,16 @@ const DonationProgress: React.FC = () => {
 
       if (hasSavedToDb.current || donationData.savedToDb) return;
 
+      const now = Date.now();
+      const createdAt = donationData.createdAt
+        ? new Date(donationData.createdAt).getTime()
+        : now;
+
+      const FIVE_MINUTES = 5 * 60 * 1000;
+      const hasBeenFiveMinutes = now - createdAt >= FIVE_MINUTES;
+
+      if (!hasBeenFiveMinutes) return;
+
       try {
         await saveDonation(donationData);
         hasSavedToDb.current = true;
@@ -85,7 +92,7 @@ const DonationProgress: React.FC = () => {
           "donationData",
           JSON.stringify({ ...donationData, savedToDb: true })
         );
-        console.log("Donation saved to DB on homepage after return.");
+        console.log("Donation saved to DB on homepage after 5+ minutes.");
       } catch (error) {
         console.error("Failed to save donation on homepage:", error);
       }

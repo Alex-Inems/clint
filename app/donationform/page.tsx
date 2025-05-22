@@ -23,7 +23,7 @@ const DonationForm: React.FC = () => {
     const timeReturned = Date.now();
     const timeAway = timeReturned - timeLeftPage;
 
-    if (timeAway >= 25000) { // 1 minute
+    if (timeAway >= 60000) { // 1 minute
       const donationDataJson = localStorage.getItem("donationData");
       if (!donationDataJson) return;
 
