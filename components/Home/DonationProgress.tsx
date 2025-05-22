@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { db, collection, getDocs } from "@/firebaseConfig";
 import { formatDistanceToNow } from "date-fns";
+import { saveDonation, DonationData } from "@/lib/saveDonation"; // import your saveDonation function
 
 interface Donor {
   name: string;
@@ -20,6 +21,9 @@ const DonationProgress: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [, setTimeUpdateTick] = useState(0);
+
+  // To track if donation has been saved during this session
+  const hasSavedToDb = useRef(false);
 
   useEffect(() => {
     const fetchDonors = async () => {
@@ -64,6 +68,32 @@ const DonationProgress: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // New effect: Save donation from localStorage if exists and not saved yet
+  useEffect(() => {
+    async function saveIfNeeded() {
+      const donationDataJson = localStorage.getItem("donationData");
+      if (!donationDataJson) return;
+
+      const donationData: DonationData = JSON.parse(donationDataJson);
+
+      if (hasSavedToDb.current || donationData.savedToDb) return;
+
+      try {
+        await saveDonation(donationData);
+        hasSavedToDb.current = true;
+        localStorage.setItem(
+          "donationData",
+          JSON.stringify({ ...donationData, savedToDb: true })
+        );
+        console.log("Donation saved to DB on homepage after return.");
+      } catch (error) {
+        console.error("Failed to save donation on homepage:", error);
+      }
+    }
+
+    saveIfNeeded();
+  }, []);
+
   const totalRaised = donors.reduce((sum, donor) => sum + donor.amount, 0);
   const percentage = Math.min((totalRaised / GOAL) * 100, 100);
 
@@ -97,7 +127,7 @@ const DonationProgress: React.FC = () => {
           </div>
         </div>
         <p className="text-gray-600 mt-2">
-        €{totalRaised.toLocaleString()} raised of €{GOAL.toLocaleString()} goal
+          €{totalRaised.toLocaleString()} raised of €{GOAL.toLocaleString()} goal
         </p>
       </div>
 
