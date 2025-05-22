@@ -97,7 +97,7 @@ const DonationProgress: React.FC = () => {
           </div>
         </div>
         <p className="text-gray-600 mt-2">
-          ${totalRaised.toLocaleString()} raised of ${GOAL.toLocaleString()} goal
+        €{totalRaised.toLocaleString()} raised of €{GOAL.toLocaleString()} goal
         </p>
       </div>
 
@@ -116,7 +116,7 @@ const DonationProgress: React.FC = () => {
                     <p className="text-sm text-gray-600 mt-1">“{donor.message}”</p>
                   )}
                   <p className="text-sm text-green-700 font-semibold mt-2">
-                    Donated ${donor.amount}
+                    Donated €{donor.amount}
                   </p>
                   <p className="text-xs text-gray-400 mt-1">
                     {formatDistanceToNow(donor.createdAt, { addSuffix: true })}
