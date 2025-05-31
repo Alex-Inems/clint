@@ -78,7 +78,7 @@ const DonationProgress: React.FC = () => {
       const now = new Date();
       const diffInMinutes = (now.getTime() - createdAt.getTime()) / 1000 / 60;
 
-      if (diffInMinutes >= 4) {
+      if (diffInMinutes >= 7) {
         try {
           await saveDonation(donationData);
           hasSavedToDb.current = true;
@@ -86,7 +86,7 @@ const DonationProgress: React.FC = () => {
             "donationData",
             JSON.stringify({ ...donationData, savedToDb: true })
           );
-          console.log("Donation saved to DB on homepage after 5+ mins.");
+          console.log("Donation saved to DB on homepage after 4+ mins.");
         } catch (error) {
           console.error("Failed to save donation on homepage:", error);
         }
