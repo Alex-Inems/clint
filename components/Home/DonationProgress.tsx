@@ -27,7 +27,7 @@ const DonationProgress: React.FC = () => {
     const fetchDonors = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "donations"));
-        const donorList: Donor[] = querySnapshot.docs.map(doc => {
+        const donorList: Donor[] = querySnapshot.docs.map((doc) => {
           const data = doc.data();
           let createdAt: Date;
 
@@ -47,7 +47,9 @@ const DonationProgress: React.FC = () => {
           };
         });
 
-        donorList.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        donorList.sort(
+          (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+        );
         setDonors(donorList);
       } catch (err) {
         console.error("Failed to fetch donors:", err);
@@ -60,7 +62,7 @@ const DonationProgress: React.FC = () => {
     fetchDonors();
 
     const interval = setInterval(() => {
-      setTimeUpdateTick(prev => prev + 1);
+      setTimeUpdateTick((prev) => prev + 1);
     }, 60000);
 
     return () => clearInterval(interval);
@@ -71,8 +73,8 @@ const DonationProgress: React.FC = () => {
       const donationDataJson = localStorage.getItem("donationData");
       if (!donationDataJson) return;
 
-      const donationData: DonationData & { returnedTooEarly?: boolean } = JSON.parse(donationDataJson);
-      if (hasSavedToDb.current || donationData.savedToDb || donationData.returnedTooEarly) return;
+      const donationData: DonationData = JSON.parse(donationDataJson);
+      if (hasSavedToDb.current || donationData.savedToDb) return;
 
       const createdAt = new Date(donationData.createdAt);
       const now = new Date();
@@ -86,17 +88,14 @@ const DonationProgress: React.FC = () => {
             "donationData",
             JSON.stringify({ ...donationData, savedToDb: true })
           );
-          console.log("Donation saved to DB on homepage after 4+ mins.");
+          console.log("Donation saved to DB on homepage after 7+ mins.");
         } catch (error) {
           console.error("Failed to save donation on homepage:", error);
         }
       } else {
-        // ❌ Mark this donation as invalid for future saves
-        localStorage.setItem(
-          "donationData",
-          JSON.stringify({ ...donationData, returnedTooEarly: true })
-        );
-        console.log("Returned too early — donation will never be saved.");
+        // ❌ Too early — discard donation and remove it so it won't be retried
+        localStorage.removeItem("donationData");
+        console.log("Returned too early — donation discarded and removed.");
       }
     }
 
@@ -111,22 +110,27 @@ const DonationProgress: React.FC = () => {
   const currentDonors = donors.slice(indexOfFirstDonor, indexOfLastDonor);
   const totalPages = Math.ceil(donors.length / DONORS_PER_PAGE);
 
-  const handlePrev = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-  const handleNext = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  const handlePrev = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNext = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   if (loading) {
     return <div className="text-center py-10">Loading donations...</div>;
   }
 
   if (error) {
-    return <div className="text-center text-red-500 py-10">{error}</div>;
+    return (
+      <div className="text-center text-red-500 py-10">{error}</div>
+    );
   }
 
   return (
     <section className="bg-gray-100 py-12 px-6 md:px-20 space-y-10">
       {/* Progress Section */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Donation Goal</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          Donation Goal
+        </h2>
         <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
           <div
             className="bg-green-600 h-full text-white text-sm flex items-center justify-center transition-all duration-500"
@@ -149,10 +153,15 @@ const DonationProgress: React.FC = () => {
           <>
             <ul className="space-y-4">
               {currentDonors.map((donor, index) => (
-                <li key={index} className="bg-white p-4 rounded-lg shadow-sm">
+                <li
+                  key={index}
+                  className="bg-white p-4 rounded-lg shadow-sm"
+                >
                   <p className="text-gray-800 font-medium">{donor.name}</p>
                   {donor.message && (
-                    <p className="text-sm text-gray-600 mt-1">“{donor.message}”</p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      “{donor.message}”
+                    </p>
                   )}
                   <p className="text-sm text-green-700 font-semibold mt-2">
                     Donated €{donor.amount}
