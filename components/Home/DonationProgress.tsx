@@ -80,7 +80,7 @@ const DonationProgress: React.FC = () => {
       const now = new Date();
       const diffInMinutes = (now.getTime() - createdAt.getTime()) / 1000 / 60;
 
-      if (diffInMinutes >= 7) {
+      if (diffInMinutes >= 6) {
         try {
           await saveDonation(donationData);
           hasSavedToDb.current = true;
